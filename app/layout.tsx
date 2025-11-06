@@ -2,14 +2,14 @@ import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import { Sora } from 'next/font/google';
 import css from './Home.module.css';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
-export const metadata: Metadata = {
-  openGraph: {},
+type ChildrenType = {
+  children: React.ReactNode;
+  modal: React.ReactNode;
 };
 
 const nunitoSans = Nunito_Sans({
@@ -25,11 +25,6 @@ const sora = Sora({
   variable: '--font-sora',
   display: 'swap',
 });
-
-type ChildrenType = {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-};
 
 export default function RootLayout({
   children,

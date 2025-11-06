@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 };
 
 const nunitoSans = Nunito_Sans({
-  subsets: ['latin'],
+  subsets: ['cyrillic'],
   weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-nunito-sans',
   display: 'swap',
 });
 
 const sora = Sora({
-  subsets: ['latin'],
+  subsets: ['latin-ext'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-sora',
   display: 'swap',

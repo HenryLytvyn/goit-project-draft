@@ -1,8 +1,86 @@
+/* RESET */
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+address {
+  font-style: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+p:last-child,
+li:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* BASE */
+
 body {
   font-family: var(--font-nunito-sans), sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  background-color: #f8f9fa;
+
+  color: #000;
+  background-color: #f7f9ff;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sora), sans-serif;
+}
+
+/* CONTAINER */
+
+/* Styles for Mobile devices */
+.container {
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 0 32px;
+  }
+}
+
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .container {
+    width: 1440px;
+    padding: 0 64px;
+  }
 }

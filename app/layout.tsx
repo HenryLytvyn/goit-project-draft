@@ -3,46 +3,26 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { Nunito_Sans } from 'next/font/google';
+import { Sora } from 'next/font/google';
 import css from './Home.module.css';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 export const metadata: Metadata = {
-  title: 'Web app to create and manage your own notes by categories',
-  description:
-    'Create, manage, and organize your notes by categories with a clean and intuitive web app.',
-  icons: {
-    icon: '/favicon.ico',
-  },
-
-  openGraph: {
-    title: 'Web app to create and manage your own notes by categories',
-    description:
-      'Create, manage, and organize your notes by categories with a clean and intuitive web app.',
-    url: 'https://08-zustand-zeta.vercel.app/',
-    images: [
-      {
-        url: '/notehub-og-meta',
-        width: 1200,
-        height: 630,
-        alt: 'NoteHub styling card',
-      },
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'NoteHub styling card',
-      },
-    ],
-    type: 'website',
-    siteName: 'NoteHub',
-  },
+  openGraph: {},
 };
 
-const roboto = Roboto({
+const nunitoSans = Nunito_Sans({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-roboto',
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-nunito-sans',
+  display: 'swap',
+});
+
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-sora',
   display: 'swap',
 });
 
@@ -57,7 +37,7 @@ export default function RootLayout({
 }: Readonly<ChildrenType>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>
+      <body className={`${nunitoSans.variable} ${sora.variable}`}>
         <TanStackProvider>
           <AuthProvider>
             <Header />

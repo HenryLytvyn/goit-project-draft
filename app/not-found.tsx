@@ -17,8 +17,8 @@ export const metadata: Metadata = {
         alt: 'page not found',
       },
     ],
-    siteName: 'NoteHub',
-    url: 'https://08-zustand-zeta.vercel.app/not-found',
+    siteName: 'travellers',
+    url: 'http://localhost:3000/not-found',
   },
 };
 

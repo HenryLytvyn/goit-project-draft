@@ -59,6 +59,10 @@ h3 {
   font-family: var(--font-sora), sans-serif;
 }
 
+/*SECTION*/
+.section {
+  padding: 64px 0;
+}
 /* CONTAINER */
 
 /* Styles for Mobile devices */
@@ -69,6 +73,8 @@ h3 {
   max-width: 375px;
   margin: 0 auto;
   padding: 0 20px;
+
+  background-color: orange; /*DELETE*/
 }
 
 /* Styles for Tablet devices */

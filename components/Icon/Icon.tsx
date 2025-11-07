@@ -1,7 +1,7 @@
 import { SVGProps } from 'react';
 
 type IconProps = SVGProps<SVGSVGElement> & {
-  name: string; // имя иконки, соответствует id символа в sprite
+  name: string;
   className?: string;
 };
 
@@ -13,4 +13,4 @@ export function Icon({ name, className, ...props }: IconProps) {
   );
 }
 
-// exemple of use: <Icon name="icon-logout" className="text-gray‑700" />
+// exemple of use: <Icon name="icon-logout" className={css.header} />

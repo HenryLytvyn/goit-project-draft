@@ -1,5 +1,7 @@
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import 'modern-normalize/modern-normalize.css';
 import './globals.css';
+
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { Nunito_Sans } from 'next/font/google';

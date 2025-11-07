@@ -1,0 +1,68 @@
+.loginItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid rgba(0, 0, 0, 0.15); */
+  border-radius: 8px;
+
+  width: 100%;
+  height: 32px;
+
+  background-color: rgba(255, 255, 255, 0.1);
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+.loginItem:hover,
+.loginItem:focus {
+  background-color: #4169e1;
+}
+
+.loginItem:active {
+  background-color: #1a2a5a;
+}
+
+.loginItemRegister {
+  background-color: #fff;
+}
+
+.loginLink {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+
+  padding: 4px 10px;
+  width: 100%;
+  height: 100%;
+
+  /* color: #000; */
+}
+
+.loginLinkRegister {
+  color: #000;
+}
+
+.loginLinkRegister:hover {
+  color: #fff;
+}
+
+@media screen and (min-width: 1440px) {
+  .loginItem {
+    width: auto;
+    height: 35px;
+    margin-right: 16px;
+  }
+
+  .loginLink {
+    font-size: 18px;
+    width: auto;
+  }
+
+  .loginItemRegister {
+  }
+
+  .loginLinkRegister {
+  }
+}

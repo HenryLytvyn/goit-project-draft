@@ -1,12 +1,7 @@
 .header {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
-  /* height: 72px; */
   padding-top: 18px;
   padding-bottom: 18px;
   background-color: #9c9c9c;
-  /* color: white; */
 }
 
 .headerContainer {

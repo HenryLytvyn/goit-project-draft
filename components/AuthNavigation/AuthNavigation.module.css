@@ -1,71 +1,98 @@
 .loginItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* border: 1px solid rgba(0, 0, 0, 0.15); */
+  margin-left: 10px;
+}
+
+.loginItemRegister {
+  margin-left: 16px;
+}
+
+.loginLink {
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
 
-  width: 100%;
-  height: 32px;
+  padding: 3px 150px;
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.05);
 
-  background-color: rgba(255, 255, 255, 0.1);
   transition:
+    border 250ms ease,
     background-color 250ms ease,
     color 250ms ease;
 }
 
-.loginItem:hover,
-.loginItem:focus {
+.loginLink:hover,
+.loginLink:focus {
+  border: 1px solid transparent;
   background-color: #4169e1;
+  color: #fff;
 }
 
-.loginItem:active {
+.loginLink:active {
   background-color: #1a2a5a;
 }
 
-.loginItemRegister {
-  background-color: #fff;
-}
-
-.loginLink {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: center;
-
-  padding: 4px 10px;
-  width: 100%;
-  height: 100%;
-
-  /* color: #000; */
-}
-
 .loginLinkRegister {
+  padding: 3px 126px;
+  border: 1px solid transparent;
+  color: #fff;
+  background-color: #4169e1;
+}
+
+.loginLinkRegister:hover,
+.loginLinkRegister:focus {
+  border: 1px solid #4169e1;
+  background-color: #e8eeff;
   color: #000;
 }
 
-.loginLinkRegister:hover {
+.loginLinkRegister:active {
+  background-color: #7a96ea;
+}
+
+.loginLinkMainPage {
+  border: 1px solid transparent;
   color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.loginLinkMainPage:hover,
+.loginLinkMainPage:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.loginLinkMainPage:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.loginLinkRegisterMainPage {
+  color: #000;
+  background-color: #fff;
+}
+
+.loginLinkRegisterMainPage:hover,
+.loginLinkRegisterMainPage:focus {
+  color: #fff;
+  background-color: #4169e1;
+}
+
+.loginLinkRegisterMainPage:active {
+  border: 1px solid transparent;
+  background-color: #1a2a5a;
 }
 
 @media screen and (min-width: 1440px) {
   .loginItem {
-    width: auto;
-    height: 35px;
-    margin-right: 16px;
-  }
-
-  .loginLink {
-    font-size: 18px;
-    width: auto;
-    color: #fff;
-  }
-
-  .loginLinkRegister {
-    color: #000;
   }
 
   .loginItemRegister {
+  }
+
+  .loginLink {
+    padding: 4px 10px;
   }
 
   .loginLinkRegister {

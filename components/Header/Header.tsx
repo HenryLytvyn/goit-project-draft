@@ -9,7 +9,7 @@ export default async function Header() {
       {/* <div className="container"> */}
       <div className={`container ${css.headerContainer}`}>
         <Logo />
-        <Navigation className={css.nav} />
+        <Navigation variant="header" />
         {/* <Icon name="icon-logout" size={24} /> */}
       </div>
     </header>

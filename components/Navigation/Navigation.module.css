@@ -1,4 +1,8 @@
 .nav {
+  /* display: none; */
+}
+
+.navHeader {
   display: none;
 }
 
@@ -6,7 +10,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 32px; */
+  gap: 32px;
+}
+
+.navListFooter {
+  margin-bottom: 64px;
 }
 
 .navItem {
@@ -45,6 +53,10 @@
 
 @media screen and (min-width: 1440px) {
   .nav {
+    display: block;
+  }
+
+  .navHeader {
     display: block;
   }
 

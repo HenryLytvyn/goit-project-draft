@@ -1,0 +1,18 @@
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.item {
+}
+
+.link {
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}

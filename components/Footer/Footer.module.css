@@ -1,26 +1,36 @@
-/* components/Footer.module.css  */
+/* components/Footer/Footer.module.css  */
 
 .footer {
-  padding: 20px;
-  background-color: #f0f0f0;
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  border-top: 1px solid #ddd;
+  padding: 57px 32px 48px 32px;
+  background-color: #e8eeff;
 }
 
-.wrap {
+.footerContainer {
+  position: relative;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.footer a {
-  color: #0042a5;
-  font-weight: 600;
-  text-decoration: none;
+.logoFooter .logoText {
+  color: #000;
 }
 
-.footer a:hover {
-  text-decoration: underline;
+.copyRight {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.copyRight::before {
+  position: absolute;
+  display: block;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 50px;
+  width: 335px;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  content: '';
 }

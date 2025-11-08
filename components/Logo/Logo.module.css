@@ -1,7 +1,7 @@
 .logoLink {
-  display: flex;
+  display: inline-flex;
   align-items: self-end;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 3px;
 
   padding: 6px 10px;
@@ -20,6 +20,10 @@
   border: 1px solid #000;
 }
 
+.footerLogoLink {
+  margin-bottom: 48px;
+}
+
 .logoText {
   font-family: var(--font-sora), sans-serif;
   font-weight: 400;
@@ -27,6 +31,10 @@
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: #ffffff;
+}
+
+.footerLogoText {
+  color: #000;
 }
 
 @media screen and (min-width: 1440px) {

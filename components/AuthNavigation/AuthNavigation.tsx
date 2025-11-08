@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import css from './AuthNavigation.module.css';
 
-export default async function AuthNavigation() {
-  // {
-  // className = '',
-  // ...props
-  // }: React.HTMLAttributes<HTMLElement>
+type NavProps = {
+  variant?: 'header-main-page';
+};
+
+export default async function AuthNavigation({ variant }: NavProps) {
   const isAuthenticated = false;
 
   return (
@@ -17,7 +17,11 @@ export default async function AuthNavigation() {
             // className={`${css.authNavItem} ${className}`}
             // {...props}
           >
-            <Link href="#" prefetch={false} className={css.loginLink}>
+            <Link
+              href="#"
+              prefetch={false}
+              className={`${css.loginLink} ${variant === 'header-main-page' ? css.loginLinkMainPage : ''}`}
+            >
               Вхід
             </Link>
           </li>
@@ -29,7 +33,7 @@ export default async function AuthNavigation() {
             <Link
               href="#"
               prefetch={false}
-              className={`${css.loginLink} ${css.loginLinkRegister}`}
+              className={`${css.loginLink} ${css.loginLinkRegister} ${variant === 'header-main-page' ? css.loginLinkRegisterMainPage : ''}`}
             >
               Реєстрація
             </Link>

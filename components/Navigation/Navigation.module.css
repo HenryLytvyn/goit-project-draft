@@ -25,10 +25,11 @@
     background-color 250ms ease;
 
   padding: 4px 10px;
+  margin-right: 12px;
 }
 
 .navItemHeaderMain {
-  margin-right: 12px;
+  /* margin-right: 12px; */
 }
 
 .navItem:hover,

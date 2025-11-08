@@ -47,7 +47,13 @@ export default function Navigation({ variant }: NavProps) {
           </Link>
         </li>
 
-        {variant === 'footer' || <AuthNavigation />}
+        {/* {variant === 'footer' || <AuthNavigation />} */}
+
+        {variant === 'header-main-page' && (
+          <AuthNavigation variant="header-main-page" />
+        )}
+
+        {variant === 'header' && <AuthNavigation />}
       </ul>
     </nav>
   );

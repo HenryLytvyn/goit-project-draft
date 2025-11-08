@@ -20,7 +20,12 @@
   border: 1px solid #000;
 }
 
-.footerLogoLink {
+.logoLinkHeaderMain:hover,
+.logoLinkHeaderMain:focus {
+  border: 1px solid #fff;
+}
+
+.logoLinkFooter {
   margin-bottom: 48px;
 }
 
@@ -30,20 +35,27 @@
   font-size: 17px;
   line-height: 1.1;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: #000;
 }
 
-.footerLogoText {
-  color: #000;
+.logoTextHeaderMain {
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .logoLinkFooter {
+    margin-bottom: 41px;
+    grid-row: 1;
+    grid-column: 1;
+  }
 }
 
 @media screen and (min-width: 1440px) {
   .logoLink {
   }
 
-  .logoLink:hover,
-  .logoLink:focus {
-    border: 1px solid #fff;
+  .logoLinkFooter {
+    margin-bottom: 68px;
   }
 
   .logoLink:active {

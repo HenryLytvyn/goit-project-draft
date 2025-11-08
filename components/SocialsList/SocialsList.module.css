@@ -1,7 +1,7 @@
 .list {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 16px;
   margin-bottom: 48px;
 }
@@ -15,4 +15,25 @@
 .icon {
   width: 32px;
   height: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    margin-bottom: 40px;
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .list {
+    margin-left: 156px;
+    justify-content: center;
+    margin-bottom: 75px;
+  }
 }

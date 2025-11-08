@@ -4,13 +4,13 @@ import css from './Logo.module.css';
 import Image from 'next/image';
 
 type LogoProps = {
-  variant?: 'header' | 'footer';
+  variant?: 'header-main-page' | 'footer';
 };
 
 export default function Logo({ variant }: LogoProps) {
   return (
     <Link
-      className={`${css.logoLink} ${variant === 'footer' ? css.footerLogoLink : ''}`}
+      className={`${css.logoLink} ${variant === 'footer' ? css.logoLinkFooter : ''} ${variant === 'header-main-page' ? css.logoLinkHeaderMain : ''}`}
       href="/"
     >
       <Image
@@ -20,7 +20,8 @@ export default function Logo({ variant }: LogoProps) {
         height={22.4}
       />
       <span
-        className={`${css.logoText} ${variant === 'footer' ? css.footerLogoText : ''}`}
+        className={`${css.logoText}  
+        ${variant === 'header-main-page' ? css.logoTextHeaderMain : ''}`}
       >
         Подорожники
       </span>

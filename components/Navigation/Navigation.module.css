@@ -18,38 +18,52 @@
 }
 
 .navItem {
-  margin-right: 12px;
   border: 1px solid transparent;
   border-radius: 8px;
   transition:
     border 250ms ease,
     background-color 250ms ease;
 
-  /* padding-top: 4px;
-  padding-bottom: 4px;
-  width: 100%; */
   padding: 4px 10px;
 }
 
-/* .navItem:last-child {
-  margin-right: 24px;
-} */
+.navItemHeaderMain {
+  margin-right: 12px;
+}
 
-.navItem:hover {
+.navItem:hover,
+.navItem:focus {
   border: 1px solid #000;
+}
+
+.navItemHeaderMain:hover,
+.navItemHeaderMain:focus {
+  border: 1px solid #fff;
 }
 
 .navLink {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-
-  color: #000;
 }
 
-/* .authNavItem {
-  font-size: 40px;
-} */
+.navLinkHeaderMain {
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .navFooter {
+    grid-row: 2;
+    grid-column: span 2;
+  }
+
+  .navListFooter {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+}
 
 @media screen and (min-width: 1440px) {
   .nav {
@@ -60,16 +74,21 @@
     display: block;
   }
 
+  .navFooter {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
   .navList {
     flex-direction: row;
+    gap: 0;
+  }
+
+  .navListFooter {
+    gap: 12px;
   }
 
   .navItem {
-  }
-
-  .navItem:hover,
-  .navItem:focus {
-    border: 1px solid #fff;
   }
 
   .navItem:active {
@@ -78,6 +97,5 @@
 
   .navLink {
     font-size: 18px;
-    color: #ffffff;
   }
 }

@@ -1,7 +1,7 @@
 /* components/Footer/Footer.module.css  */
 
 .footer {
-  padding: 57px 32px 48px 32px;
+  padding: 56px 0 48px 0;
   background-color: #e8eeff;
 }
 
@@ -33,4 +33,49 @@
   height: 1px;
   background-color: rgba(0, 0, 0, 0.15);
   content: '';
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+  }
+
+  .footerContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .copyRight {
+    grid-row: 3;
+    grid-column: span 2;
+
+    margin: 0 auto;
+  }
+
+  .copyRight::before {
+    width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .footerContainer {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .copyRight {
+    font-size: 16px;
+    grid-row: 2;
+    grid-column: span 3;
+
+    margin: 0 auto;
+  }
+
+  .copyRight::before {
+    bottom: 56px;
+    width: 1312px;
+  }
 }

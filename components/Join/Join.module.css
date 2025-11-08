@@ -63,35 +63,28 @@
   }
 }
 
-.button:hover {
+.button:hover:not(:disabled),
+.button:focus:not(:disabled) {
   background-color: #e8eeff;
   color: #000000;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(84, 104, 231, 0.3);
 }
 
-.button:focus {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
-.button:active {
+.button:active:not(:disabled) {
   background-color: #7a96ea;
   color: #000000;
   transform: translateY(0);
 }
 
-.button:disabled {
-  background-color: #94a3b8;
+.button:disabled,
+.button:disabled:hover {
+  background-color: #4169e1;
+  opacity: 0.3;
+  border-color: transparent;
+  color: #ffffff;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
-  opacity: 0.7;
-}
-
-.button:disabled:hover {
-  background-color: #94a3b8;
-  transform: none;
-  box-shadow: none;
 }
 
 /* Tablet styles */

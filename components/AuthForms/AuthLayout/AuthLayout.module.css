@@ -1,0 +1,150 @@
+.authPage {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 10;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: self-end;
+  justify-content: flex-start;
+  gap: 3px;
+
+  padding: 6px 10px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background-color: transparent;
+  transition:
+    border 250ms ease,
+    background-color 250ms ease;
+}
+
+.logoLink:hover {
+  opacity: 0.7;
+}
+
+.logoText {
+  font-family: var(--font-sora), sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.contentWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 335px;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 32px;
+  gap: 0;
+  border-bottom: 1px solid transparent;
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 24px;
+  text-align: center;
+  font-family: var(--font-nunito-sans), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: #4169e1;
+  opacity: 0.8;
+}
+
+.tab.active {
+  color: #000000;
+  border-bottom-color: #d1d5db;
+  font-weight: 400;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  flex-shrink: 0;
+  padding-bottom: 27px;
+}
+
+.footer p {
+  font-family: var(--font-nunito-sans), sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #000000;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .logoContainer {
+    left: 32px;
+  }
+
+  .contentWrapper {
+    padding: 72px 32px;
+  }
+
+  .formCard {
+    max-width: 704px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .logoContainer {
+    left: 64px;
+  }
+
+  .contentWrapper {
+    padding: 72px 64px;
+  }
+
+  .formCard {
+    max-width: 644px;
+  }
+}

@@ -9,7 +9,7 @@ const Join = () => {
   const router = useRouter();
 
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-  //   const isLoading = useAuthStore(state => state.isLoading);
+  const isLoading = useAuthStore(state => state.isLoading);
 
   const handleButtonClick = () => {
     if (isAuthenticated) {
@@ -34,10 +34,10 @@ const Join = () => {
             type="button"
             className={styles.button}
             onClick={handleButtonClick}
+            disabled={isLoading}
             aria-label={buttonText}
           >
-            {/* {isLoading ? 'Завантаження...' : buttonText} */}
-            {buttonText}
+            {isLoading ? 'Завантаження...' : buttonText}
           </button>
         </div>
       </div>

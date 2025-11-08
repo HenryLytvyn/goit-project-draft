@@ -10,6 +10,7 @@ import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 type ChildrenType = {
   children: React.ReactNode;
+  modal: React.ReactNode;
 };
 
 const nunitoSans = Nunito_Sans({
@@ -26,15 +27,17 @@ const sora = Sora({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: Readonly<ChildrenType>) {
+export default function RootLayout({
+  children,
+  modal,
+}: Readonly<ChildrenType>) {
   return (
-    <html lang="en">
+    <html lang="uk">
       <body className={`${nunitoSans.variable} ${sora.variable}`}>
         <TanStackProvider>
           <AuthProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            {children}
+            <div style={{ position: 'fixed', top: 0, left: 0 }}>{modal}</div>
           </AuthProvider>
         </TanStackProvider>
       </body>

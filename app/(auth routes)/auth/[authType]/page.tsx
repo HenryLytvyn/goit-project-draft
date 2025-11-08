@@ -4,7 +4,7 @@ import RegistrationForm from '@/components/AuthForms/RegistrationForm/Registrati
 import LoginForm from '@/components/AuthForms/LoginForm/LoginForm';
 
 export async function generateMetadata({ params }: AuthPageProps) {
-  const { authType } = params;
+  const { authType } = await params;
 
   const titles = {
     register: 'Реєстрація | Подорожники',
@@ -28,8 +28,8 @@ interface AuthPageProps {
   };
 }
 
-export default function AuthPage({ params }: AuthPageProps) {
-  const { authType } = params;
+export default async function AuthPage({ params }: AuthPageProps) {
+  const { authType } = await params;
 
   if (authType !== 'register' && authType !== 'login') {
     notFound();

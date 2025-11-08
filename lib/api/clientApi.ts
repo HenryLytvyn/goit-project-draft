@@ -64,7 +64,7 @@ import { User, AuthResponse } from '@/types/user';
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { AxiosError } from 'axios';
 
-// MOCK MODE - встановіть true для тестування без бекенду
+// MOCK MODE - для тестування без бекенду
 const USE_MOCK_API = process.env.NEXT_PUBLIC_USE_MOCK_API === 'true';
 
 // Mock user для тестування

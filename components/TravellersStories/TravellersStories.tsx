@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Story } from '@/types/story';
 import TravellersStoriesItem from '../TravellersStoriesItem/TravellersStoriesItem';
 import { fetchStories } from '@/lib/api/serverApi';
+import css from './TravellersStories.module.css';
 
 interface TravellersStoriesProps {
   isAuthenticated: boolean;
@@ -43,11 +44,11 @@ export default function TravellersStories({ isAuthenticated }: TravellersStories
       </ul>
 
       {hasMore && (
-        <div className="text-center mt-8">
+        <div className={css.stories__footer}>
           <button
             onClick={() => setPage(prev => prev + 1)}
             disabled={loading}
-            className=""
+            className={css.stories__more}
           >
             {loading ? 'Завантаження...' : 'Переглянути всі'}
           </button>

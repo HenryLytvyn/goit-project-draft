@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { Story } from '@/types/story';
 import { addStoryToFavorites, removeStoryFromFavorites } from '@/lib/api/serverApi';
+import css from './TravellersStoriesItem.module.css';
+import { Icon } from '../Icon/Icon';
 
 interface TravellersStoriesItemProps {
   story: Story;
@@ -45,40 +47,40 @@ export default function TravellersStoriesItem({ story, isAuthenticated }: Travel
   };
 
   return (
-    <li className="">
-      <Image src={story.img} alt={story.title} width={400} height={250} className="" />
+    <li className={css.story}>
+      <Image src={story.img} alt={story.title} width={400} height={200} className={css.story__img} />
 
-      <div className="">
-        <div>
-          <p className="">{story.category}</p>
-          <h3 className="">{story.title}</h3>
-          <p className="">{story.article}</p>
-              </div>
-                <div className="story__author">
-      <Image src={story.author.avatarUrl} alt="Автор" className="story__avatar" />
-      <div className="story__info">
-        <p className="story__name">{story.author.name}</p>
-                      <p className="story__meta">{story.date} • {story.favoriteCount}</p>
+      <div className={css.story__content}>
+        
+        <p className={css.story__category}>{story.category}</p>
+        <h3 className={css.story__title}>{story.title}</h3>
+        <p className={css.story__text}>{story.article}</p>
+              
+      <div className={css.story__author}>
+      <Image src={story.author.avatarUrl} alt="Автор" className={css.story__avatar} />
+      <div className={css.story__info}>
+        <p className={css.story__name}>{story.author.name}</p>
+            <p className={css.story__meta}>{story.date} •  <span className="favoriteCount">{favoriteCount}</span><Icon name="icon-bookmark" className={css.icon} /></p>
       </div>
     </div>
-<div className="">
+<div className={css.story__actions}>
           <button
             onClick={() => router.push(`/stories/${story._id}`)}
-            className=""
+            className={css.story__btn}
           >
             Переглянути статтю
           </button>
 
-          <div className="">
+          
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className=""
+              className={css.story__save}
             >
-              {isSaved ? '★' : '☆'}
+              {isSaved ? <Icon name='icon-bookmark' className={css.story__save} /> : <Icon name='icon-bookmark' className={css.icon__bookmark} />}
             </button>
-            <span className="">{favoriteCount}</span>
-          </div>
+           
+          
         </div>
       </div>
     </li>

@@ -2,8 +2,15 @@ import { notFound } from 'next/navigation';
 import AuthLayout from '@/components/AuthForms/AuthLayout/AuthLayout';
 import RegistrationForm from '@/components/AuthForms/RegistrationForm/RegistrationForm';
 import LoginForm from '@/components/AuthForms/LoginForm/LoginForm';
+import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: AuthPageProps) {
+type AuthPageProps = {
+  params: Promise<{ authType: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: AuthPageProps): Promise<Metadata> {
   const { authType } = await params;
 
   const titles = {
@@ -19,12 +26,6 @@ export async function generateMetadata({ params }: AuthPageProps) {
   return {
     title: titles[authType as keyof typeof titles] || 'Подорожники',
     description: descriptions[authType as keyof typeof descriptions] || '',
-  };
-}
-
-interface AuthPageProps {
-  params: {
-    authType: string;
   };
 }
 

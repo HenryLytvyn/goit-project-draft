@@ -5,11 +5,7 @@ import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import { Nunito_Sans } from 'next/font/google';
 import { Sora } from 'next/font/google';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
-
-type ChildrenType = {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-};
+import { Metadata } from 'next';
 
 const nunitoSans = Nunito_Sans({
   subsets: ['cyrillic'],
@@ -25,18 +21,21 @@ const sora = Sora({
   display: 'swap',
 });
 
+export const metadata: Metadata = {
+  title: 'Travel App',
+  description: 'Travel application',
+};
+
 export default function RootLayout({
   children,
-  modal,
-}: Readonly<ChildrenType>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="uk">
       <body className={`${nunitoSans.variable} ${sora.variable}`}>
         <TanStackProvider>
-          <AuthProvider>
-            {children}
-            <div style={{ position: 'fixed', top: 0, left: 0 }}>{modal}</div>
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </TanStackProvider>
       </body>
     </html>

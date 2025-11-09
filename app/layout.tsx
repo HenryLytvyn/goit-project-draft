@@ -6,6 +6,7 @@ import { Nunito_Sans } from 'next/font/google';
 import { Sora } from 'next/font/google';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
 import { Metadata } from 'next';
+import BreakpointInitializer from '@/components/Providers/BreakpointInitializer';
 
 const nunitoSans = Nunito_Sans({
   subsets: ['cyrillic'],
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${nunitoSans.variable} ${sora.variable}`}>
+        <BreakpointInitializer />
         <TanStackProvider>
           <AuthProvider>{children}</AuthProvider>
         </TanStackProvider>

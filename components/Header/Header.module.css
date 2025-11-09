@@ -4,6 +4,14 @@
   background-color: #9c9c9c;
 }
 
+.headerMainPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 .headerContainer {
   display: flex;
   align-items: center;

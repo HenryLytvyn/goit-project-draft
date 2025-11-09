@@ -9,7 +9,7 @@ export default function Header() {
   const isMainPage = true;
 
   return (
-    <header className={css.header}>
+    <header className={`${css.header} ${css.headerMainPage}`}>
       <div className={`container ${css.headerContainer}`}>
         <Logo variant={isMainPage ? 'header-main-page' : undefined} />
         <Navigation variant={isMainPage ? 'header-main-page' : 'header'} />

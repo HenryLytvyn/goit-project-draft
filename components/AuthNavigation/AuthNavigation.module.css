@@ -1,9 +1,10 @@
 .loginItem {
-  margin-left: 10px;
 }
 
-.loginItemRegister {
-  margin-left: 16px;
+.publichStoryItem {
+}
+
+.publichStoryLink {
 }
 
 .loginLink {
@@ -11,10 +12,14 @@
   border-radius: 8px;
   display: block;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 
   padding: 3px 150px;
+  display: block;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* width: 100%; */
   color: #000;
   background-color: rgba(0, 0, 0, 0.05);
 
@@ -36,7 +41,7 @@
 }
 
 .loginLinkRegister {
-  padding: 3px 126px;
+  padding: 3px 125.5px;
   border: 1px solid transparent;
   color: #fff;
   background-color: #4169e1;
@@ -84,15 +89,22 @@
   background-color: #1a2a5a;
 }
 
+.loginLinkRegisterMobileMenu {
+  margin-top: -16px;
+}
+
 @media screen and (min-width: 1440px) {
   .loginItem {
+    margin-left: 10px;
   }
 
   .loginItemRegister {
+    margin-left: 16px;
   }
 
   .loginLink {
     padding: 4px 10px;
+    font-size: 16px;
   }
 
   .loginLinkRegister {

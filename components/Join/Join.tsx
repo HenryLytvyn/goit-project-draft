@@ -22,7 +22,7 @@ const Join = () => {
   const buttonText = isAuthenticated ? 'Збережені' : 'Зареєструватися';
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="join">
       <div className="container">
         <div className={styles.joinCard}>
           <h2 className={styles.title}>Приєднуйтесь до нашої спільноти</h2>

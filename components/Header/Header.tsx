@@ -13,7 +13,7 @@ export default function Header() {
       <div className={`container ${css.headerContainer}`}>
         <Logo variant={isMainPage ? 'header-main-page' : undefined} />
         <Navigation variant={isMainPage ? 'header-main-page' : 'header'} />
-        <HeaderClient />
+        <HeaderClient variant={isMainPage ? 'header-main-page' : undefined} />
       </div>
     </header>
   );

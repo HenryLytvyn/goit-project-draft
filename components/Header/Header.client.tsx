@@ -1,10 +1,14 @@
+// Components/Header/Header.client.tsx
 'use client';
 
 import { useState } from 'react';
 import MobileMenuBtn from '../MobileMenuBtn/MobileMenuBtn';
-// import css from './Header.module.css';
 
-export default function HeaderClient() {
+type HeaderClientProps = {
+  variant?: 'header-main-page';
+};
+
+export default function HeaderClient({ variant }: HeaderClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   function handleMobileMenu() {
@@ -12,6 +16,10 @@ export default function HeaderClient() {
   }
 
   return (
-    <MobileMenuBtn handleClick={handleMobileMenu} isOpen={isMobileMenuOpen} />
+    <MobileMenuBtn
+      variant={variant}
+      handleClick={handleMobileMenu}
+      isOpen={isMobileMenuOpen}
+    />
   );
 }

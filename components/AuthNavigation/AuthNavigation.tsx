@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 import css from './AuthNavigation.module.css';
 import ProfileAndLogoutLinks from './ProfileAndLogoutLinks/ProfileAndLogoutLinks';
+import { useAuthStore } from '@/lib/store/authStore';
 
 type NavProps = {
   variant?: 'header-main-page' | 'mobile-menu';
 };
 
-export default async function AuthNavigation({ variant }: NavProps) {
-  const isAuthenticated = true;
+export default function AuthNavigation({ variant }: NavProps) {
+  // const isAuthenticated = true;
+
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+
+  // console.log(isAuthenticated);
 
   return (
     <>
@@ -15,7 +22,7 @@ export default async function AuthNavigation({ variant }: NavProps) {
         <>
           <li className={css.loginItem}>
             <Link
-              href="#"
+              href="/auth/login"
               prefetch={false}
               className={`${css.loginLink} ${variant === 'header-main-page' ? css.loginLinkMainPage : ''}`}
             >
@@ -24,7 +31,7 @@ export default async function AuthNavigation({ variant }: NavProps) {
           </li>
           <li className={`${css.loginItem} ${css.loginItemRegister}`}>
             <Link
-              href="#"
+              href="/auth/register"
               prefetch={false}
               className={`${css.loginLink} ${css.loginLinkRegister} ${variant === 'header-main-page' ? css.loginLinkRegisterMainPage : ''} ${variant === 'mobile-menu' ? css.loginLinkRegisterMobileMenu : ''}`}
             >
@@ -36,13 +43,18 @@ export default async function AuthNavigation({ variant }: NavProps) {
 
       {isAuthenticated && (
         <>
-          <li className={css.publichStoryItem}>
-            <Link className={css.publichStoryLink} href="#">
+          <li
+            className={`${css.publichStoryItem} ${variant === 'header-main-page' ? css.publichStoryItemMainPage : ''}`}
+          >
+            <Link
+              className={`${css.publichStoryLink} ${variant === 'header-main-page' ? css.publichStoryLinkMainPage : ''}`}
+              href="#"
+            >
               Опублікувати історію
             </Link>
           </li>
           <li>
-            <ProfileAndLogoutLinks />
+            <ProfileAndLogoutLinks variant={variant} />
           </li>
         </>
       )}

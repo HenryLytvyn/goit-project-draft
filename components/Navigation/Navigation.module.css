@@ -24,7 +24,11 @@
     border 250ms ease,
     background-color 250ms ease;
 
-  padding: 4px 10px;
+  /* padding: 4px 10px; */
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
 }
 
 .navItemHeaderMain {
@@ -51,6 +55,12 @@
   color: #fff;
 }
 
+.navItemFooter {
+  /* padding-left: 10px;
+    padding-right: 10px; */
+  width: 335px;
+}
+
 @media screen and (min-width: 768px) {
   .navFooter {
     grid-row: 2;
@@ -62,6 +72,12 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
+  }
+
+  .navItemFooter {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
   }
 }
 
@@ -81,7 +97,7 @@
 
   .navList {
     flex-direction: row;
-    gap: 0;
+    gap: 12px;
   }
 
   .navListFooter {
@@ -89,7 +105,9 @@
   }
 
   .navItem {
-    margin-right: 12px;
+    padding: 4px 10px;
+    /* margin-right: 12px; */
+    width: auto;
   }
 
   .navItem:active {

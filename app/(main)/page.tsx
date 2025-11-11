@@ -11,7 +11,7 @@ export default async function MainPage() {
       <Hero />
       <About />
       <Popular />
-      <TravellersList /> {/* Серверний компонент */}
+      <TravellersList />
       <Join />
     </>
   );

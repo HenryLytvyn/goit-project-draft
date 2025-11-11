@@ -12,20 +12,24 @@
 .intro {
   display: grid;
   gap: 24px;
+  align-items: flex-start;
 }
 
 .title {
   font-family: var(--font-sora), sans-serif;
   font-size: 28px;
   font-weight: 700;
-  line-height: 1.25;
-  color: #111827;
+  line-height: 1.2;
+  color: #000;
 }
 
 .description {
   font-size: 16px;
-  line-height: 1.6;
-  color: #4b5563;
+  line-height: 1.55;
+  color: #000;
+  margin: 0;
+  align-self: flex-start;
+  width: 100%;
 }
 
 .features {
@@ -62,9 +66,10 @@
 }
 
 .featureDescription {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #4b5563;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #000;
 }
 
 @media (min-width: 768px) {
@@ -77,17 +82,18 @@
   }
 
   .intro {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 533px);
-    align-items: flex-start;
+    grid-template-columns: minmax(0, 779px) minmax(0, 533px);
     column-gap: 24px;
-  }
-
-  .title {
-    font-size: 36px;
   }
 
   .description {
     font-size: 18px;
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .title {
+    font-size: 36px;
   }
 
   .intro .description {
@@ -109,15 +115,21 @@
     gap: 72px;
   }
 
-  .title {
-    font-size: 42px;
+  .description {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 8px;
+    line-height: 1.55;
   }
 
-  /* .feature {
-    padding: 28px;
-  } */
+  .title {
+    font-size: 52px;
+  }
 
   .featureTitle {
-    font-size: 22px;
+    font-size: 32px;
   }
+}
+.features {
+  gap: 48px;
 }

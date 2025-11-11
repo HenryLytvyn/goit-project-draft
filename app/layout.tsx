@@ -25,6 +25,13 @@ const sora = Sora({
 export const metadata: Metadata = {
   title: 'Travel App',
   description: 'Travel application',
+
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png', sizes: '32x32' },
+    ],
+  },
 };
 
 export default function RootLayout({

@@ -1,8 +1,27 @@
-export default async function Hero() {
+'use client';
+
+import Link from 'next/link';
+import styles from './Hero.module.css';
+
+export default function Hero() {
   return (
-    <section className="section">
-      <div className="container">
-        <h2>Hero</h2>
+    <section className={`${styles.hero} hero-section`}>
+      <div className={styles.overlay} />
+      <div className={`container ${styles.container}`}>
+        <div className={styles.content}>
+          <h1 className={styles.title}>
+            <span className={styles.titleLine}>Відкрийте світ</span>
+            <span className={styles.titleLine}>подорожей з нами!</span>
+          </h1>
+          <p className={styles.description}>
+            Приєднуйтесь до нашої спільноти мандрівників, де ви зможете
+            ділитися своїми історіями та отримувати натхнення для нових пригод.
+            Відкрийте для себе нові місця та знайдіть однодумців!
+          </p>
+          <Link href="/#join" className={styles.cta}>
+            Доєднатись
+          </Link>
+        </div>
       </div>
     </section>
   );

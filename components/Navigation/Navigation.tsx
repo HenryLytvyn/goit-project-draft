@@ -1,64 +1,3 @@
-// import Link from 'next/link';
-// import css from './Navigation.module.css';
-// import AuthNavigation from '../AuthNavigation/AuthNavigation';
-
-// type NavProps = {
-//   variant?: 'header' | 'header-main-page' | 'footer' | 'mobile-menu';
-// };
-
-// export default function Navigation({ variant }: NavProps) {
-//   return (
-//     <nav
-//       className={`${css.nav} ${variant === 'footer' ? css.navFooter : ''} ${variant === 'header' ? css.navHeader : ''} ${variant === 'header-main-page' ? css.navHeader : ''}`}
-//     >
-//       <ul
-//         className={`${css.navList} ${variant === 'footer' ? css.navListFooter : ''}`}
-//       >
-//         <li
-//           className={`${css.navItem} ${variant === 'header-main-page' ? css.navItemHeaderMain : ''}`}
-//         >
-//           <Link
-//             className={`${css.navLink} ${variant === 'header-main-page' ? css.navLinkHeaderMain : ''}`}
-//             href="#"
-//           >
-//             Головна
-//           </Link>
-//         </li>
-//         <li
-//           className={`${css.navItem} ${variant === 'header-main-page' ? css.navItemHeaderMain : ''}`}
-//         >
-//           <Link
-//             className={`${css.navLink} ${variant === 'header-main-page' ? css.navLinkHeaderMain : ''}`}
-//             href="#"
-//           >
-//             Історії
-//           </Link>
-//         </li>
-//         <li
-//           className={`${css.navItem} ${variant === 'header-main-page' ? css.navItemHeaderMain : ''}`}
-//         >
-//           <Link
-//             className={`${css.navLink} ${variant === 'header-main-page' ? css.navLinkHeaderMain : ''}`}
-//             href="#"
-//           >
-//             Мандрівники
-//           </Link>
-//         </li>
-
-//         {/* {variant === 'footer' || <AuthNavigation />} */}
-
-//         {variant === 'header-main-page' && (
-//           <AuthNavigation variant="header-main-page" />
-//         )}
-
-//         {variant === 'header' && <AuthNavigation />}
-
-//         {variant === 'mobile-menu' && <AuthNavigation variant="mobile-menu" />}
-//       </ul>
-//     </nav>
-//   );
-// }
-
 import Link from 'next/link';
 import css from './Navigation.module.css';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -68,9 +7,9 @@ type NavProps = {
 };
 
 const navItems = [
-  { href: '#', label: 'Головна' },
-  { href: '#', label: 'Історії' },
-  { href: '#', label: 'Мандрівники' },
+  { href: '/', label: 'Головна' },
+  { href: '/stories', label: 'Історії' },
+  { href: '/travellers', label: 'Мандрівники' },
 ];
 
 export default function Navigation({ variant }: NavProps) {
@@ -78,7 +17,7 @@ export default function Navigation({ variant }: NavProps) {
     switch (variant) {
       case 'footer':
         return css.navFooter;
-      // case 'header':
+      case 'header':
       case 'header-main-page':
         return css.navHeader;
       default:
@@ -90,7 +29,8 @@ export default function Navigation({ variant }: NavProps) {
     return variant === 'footer' ? css.navListFooter : '';
   }
   function getNavItemClass() {
-    return variant === 'header-main-page' ? css.navItemHeaderMain : '';
+    if (variant === 'header-main-page') return css.navItemHeaderMain;
+    if (variant === 'footer') return css.navItemFooter;
   }
   function getNavLinkClass() {
     return variant === 'header-main-page' ? css.navLinkHeaderMain : '';

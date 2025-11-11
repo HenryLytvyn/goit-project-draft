@@ -69,10 +69,12 @@ const USE_MOCK_API = process.env.NEXT_PUBLIC_USE_MOCK_API === 'true';
 
 // Mock user для тестування
 const MOCK_USER: User = {
-  id: '1',
+  _id: '1',
   email: 'test@test.com',
   name: 'Тест Тестович',
-  avatar: '',
+  avatarUrl: '',
+  articlesAmount: 0,
+  description: '',
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 };
@@ -199,3 +201,55 @@ export const getMe = async (): Promise<User> => {
     );
   }
 };
+
+/*test OurTravelers*/
+export interface GetUsersClientResponse {
+  data: {
+    data: User[];
+    page: number;
+    perPage: number;
+    totalItems: number;
+    totalPages: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+  };
+  status: number;
+  message: string;
+}
+
+export interface GetUserByIdClientResponse {
+  status: number;
+  message: string;
+  data: {
+    user: User;
+    articles: {
+      _id: string;
+      title: string;
+      img: string;
+      date: string;
+      favoriteCount: number;
+    }[];
+    totalArticles: number;
+  };
+}
+
+// Виклик через Next.js API route для клієнта
+export async function getUsersClient({
+  page = 1,
+  perPage = 4,
+}: {
+  page: number;
+  perPage: number;
+}): Promise<GetUsersClientResponse> {
+  const res = await api.get<GetUsersClientResponse>('/users', {
+    params: { page, perPage },
+  });
+  return res.data;
+}
+
+export async function getUserByIdClient(
+  userId: string
+): Promise<GetUserByIdClientResponse> {
+  const res = await api.get<GetUserByIdClientResponse>(`/users/${userId}`);
+  return res.data;
+}

@@ -1,0 +1,90 @@
+/* app/travellers/[travellerId]/TravellerPage.module.css */
+.travellersId {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.profileContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  /* gap: 24px; */
+}
+
+.travellerName {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.travellerText {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px; /* Фіксована висота */
+}
+
+/* Планшет та десктоп */
+@media only screen and (min-width: 768px) {
+  .profileContainer {
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: auto auto;
+    justify-items: start;
+    text-align: left;
+    gap: 20px 40px;
+    align-items: start;
+  }
+
+  /* Аватар займає обидві рядки першої колонки */
+  .profileContainer :global(img) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .travellerName {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 28px;
+    margin-bottom: 0;
+    align-self: end;
+  }
+
+  .travellerText {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 18px;
+    margin-bottom: 0;
+    align-self: start;
+  }
+}
+
+/* Десктоп */
+@media only screen and (min-width: 1440px) {
+  .profileContainer {
+    gap: 20px 60px;
+  }
+
+  .travellerName {
+    font-size: 32px;
+  }
+
+  .travellerText {
+    font-size: 18px;
+  }
+}

@@ -1,10 +1,7 @@
-import axios, { AxiosError } from 'axios';
-
-export type ApiError = AxiosError<{ error: string }>;
-
-const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+// lib/api/api.ts
+import axios from 'axios';
 
 export const api = axios.create({
-  baseURL,
+  baseURL: '/api', // всі клієнтські запити йдуть через Next.js API routes
   withCredentials: true,
 });

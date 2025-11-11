@@ -1,17 +1,14 @@
-// import { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import css from './Main.module.css';
 
 interface MainLayoutProps {
-  children: React.ReactNode;
-  modal: React.ReactNode;
+  children: ReactNode;
+  modal: ReactNode;
 }
 
-export default function MainLayout({
-  children,
-  modal,
-}: Readonly<MainLayoutProps>) {
+export default function MainLayout({ children, modal }: MainLayoutProps) {
   return (
     <>
       <Header />

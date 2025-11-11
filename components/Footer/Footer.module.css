@@ -1,0 +1,84 @@
+/* components/Footer/Footer.module.css  */
+
+.footer {
+  padding: 56px 0 48px 0;
+  background-color: #e8eeff;
+}
+
+.footerContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoFooter .logoText {
+  color: #000;
+}
+
+.copyRight {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.copyRight::before {
+  position: absolute;
+  display: block;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 50px;
+  width: 88%;
+  min-width: 280px;
+  max-width: 335px;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  content: '';
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+  }
+
+  .footerContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .copyRight {
+    grid-row: 3;
+    grid-column: span 2;
+
+    margin: 0 auto;
+  }
+
+  .copyRight::before {
+    max-width: none;
+    width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .footerContainer {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .copyRight {
+    font-size: 16px;
+    grid-row: 2;
+    grid-column: span 3;
+
+    margin: 0 auto;
+  }
+
+  .copyRight::before {
+    bottom: 56px;
+    width: 1312px;
+  }
+}

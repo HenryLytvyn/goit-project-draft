@@ -1,0 +1,100 @@
+/* Components/MobileMenuBtn/MobileMenuBtn.module.css */
+
+.button {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8.5px 5.5px;
+  width: 32px;
+  height: 32px;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  transition:
+    border 250ms ease,
+    background-color 250ms ease;
+}
+
+.button:hover,
+.button:focus {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.navIcon {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  /* background-color: brown; */
+}
+
+.navIcon span {
+  background-color: #000;
+  position: absolute;
+  transition: 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  width: 100%;
+  height: 2px;
+}
+
+.navIcon span {
+  transition-duration: 500ms;
+  border-radius: 1px;
+}
+
+.navIcon span:nth-child(1) {
+  top: -2px;
+  left: 0px;
+}
+
+.navIcon span:nth-child(2) {
+  top: 4.5px;
+  left: 0px;
+  opacity: 1;
+}
+
+.navIcon span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+}
+
+.navIcon.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 4px;
+}
+
+.navIcon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navIcon.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 4px;
+}
+
+.buttonMainPage {
+  border: 1px solid transparent;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.buttonMainPage:hover,
+.buttonMainPage:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.buttonMainPage:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.navIconMainPage span {
+  background-color: #fff;
+}
+
+@media screen and (min-width: 1440px) {
+  .button {
+    display: none;
+  }
+}

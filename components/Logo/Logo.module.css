@@ -1,0 +1,71 @@
+.logoLink {
+  display: inline-flex;
+  align-items: self-end;
+  justify-content: flex-start;
+  gap: 3px;
+
+  padding: 6px 10px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background-color: transparent;
+  transition:
+    border 250ms ease,
+    background-color 250ms ease;
+}
+
+.logoLink:hover,
+.logoLink:focus {
+  border: 1px solid #000;
+}
+
+.logoLink:active {
+  background-color: rgba(216, 216, 216, 0.2);
+}
+
+.logoLinkHeaderMain:hover,
+.logoLinkHeaderMain:focus {
+  border: 1px solid #fff;
+}
+
+.logoLinkFooter {
+  margin-bottom: 48px;
+}
+
+.logoText {
+  font-family: var(--font-sora), sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.logoTextHeaderMain {
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .logoLinkFooter {
+    margin-bottom: 41px;
+    grid-row: 1;
+    grid-column: 1;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .logoLink {
+  }
+
+  .logoLinkFooter {
+    margin-bottom: 68px;
+  }
+
+  .logoLink:active {
+    background-color: rgba(216, 216, 216, 0.2);
+  }
+
+  .logoText {
+  }
+}

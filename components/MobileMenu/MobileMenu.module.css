@@ -1,0 +1,11 @@
+.mobileMenu {
+  /* width: 100vw; */
+  height: 100vh;
+  padding-top: 88px;
+}
+
+@media screen and (max-width: 767.98) {
+  .mobileMenu {
+    width: 335px;
+  }
+}

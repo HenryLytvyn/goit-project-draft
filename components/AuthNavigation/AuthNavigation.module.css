@@ -1,0 +1,164 @@
+.loginItem {
+}
+
+.loginLink {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+
+  padding: 3px 150px;
+  display: block;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* width: 100%; */
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.05);
+
+  transition:
+    border 250ms ease,
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+.loginLink:hover,
+.loginLink:focus {
+  border: 1px solid transparent;
+  background-color: #4169e1;
+  color: #fff;
+}
+
+.loginLink:active {
+  background-color: #1a2a5a;
+}
+
+.loginLinkRegister {
+  padding: 3px 125.5px;
+  border: 1px solid transparent;
+  color: #fff;
+  background-color: #4169e1;
+}
+
+.loginLinkRegister:hover,
+.loginLinkRegister:focus {
+  border: 1px solid #4169e1;
+  background-color: #e8eeff;
+  color: #000;
+}
+
+.loginLinkRegister:active {
+  background-color: #7a96ea;
+}
+
+.loginLinkMainPage {
+  border: 1px solid transparent;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.loginLinkMainPage:hover,
+.loginLinkMainPage:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.loginLinkMainPage:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.loginLinkRegisterMainPage {
+  color: #000;
+  background-color: #fff;
+}
+
+.loginLinkRegisterMainPage:hover,
+.loginLinkRegisterMainPage:focus {
+  color: #fff;
+  background-color: #4169e1;
+}
+
+.loginLinkRegisterMainPage:active {
+  border: 1px solid transparent;
+  background-color: #1a2a5a;
+}
+
+.loginLinkRegisterMobileMenu {
+  margin-top: -16px;
+}
+
+.publichStoryItem {
+}
+
+.publichStoryLink {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+
+  padding: 4px 85.5px;
+  border: 1px solid #4169e1;
+  border-radius: 8px;
+
+  color: #fff;
+  background-color: #4169e1;
+  transition:
+    border 250ms ease,
+    color 250ms ease,
+    background-color 250ms ease;
+}
+
+.publichStoryLink:hover,
+.publichStoryLink:focus {
+  background-color: #e8eeff;
+  color: #000;
+}
+
+.publichStoryLink:active {
+  background-color: #7a96ea;
+}
+
+.publichStoryLinkMainPage {
+  border: 1px solid #fff;
+  color: #000;
+  background-color: #fff;
+}
+
+.publichStoryLinkMainPage:hover,
+.publichStoryLinkMainPage:focus {
+  border: 1px solid #4169e1;
+  color: #fff;
+  background-color: #4169e1;
+}
+
+.publichStoryLinkMainPage:active {
+  border: 1px solid #1a2a5a;
+  background-color: #1a2a5a;
+}
+
+@media screen and (min-width: 1440px) {
+  .loginItem {
+    margin-left: 10px;
+  }
+
+  .loginItemRegister {
+    margin-left: 16px;
+  }
+
+  .loginLink {
+    padding: 4px 10px;
+    font-size: 16px;
+  }
+
+  .loginLinkRegister {
+  }
+
+  .publichStoryItem {
+  }
+
+  .publichStoryLink {
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 4px;
+    padding: 4px 10px;
+  }
+}

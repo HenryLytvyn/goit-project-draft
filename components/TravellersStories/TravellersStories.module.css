@@ -1,0 +1,18 @@
+.stories__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+@media screen and (min-width: 768px) {
+    .stories__list {
+
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+

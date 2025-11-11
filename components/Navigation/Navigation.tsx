@@ -7,9 +7,9 @@ type NavProps = {
 };
 
 const navItems = [
-  { href: '#', label: 'Головна' },
-  { href: '#', label: 'Історії' },
-  { href: '#', label: 'Мандрівники' },
+  { href: '/', label: 'Головна' },
+  { href: '/stories', label: 'Історії' },
+  { href: '/travellers', label: 'Мандрівники' },
 ];
 
 export default function Navigation({ variant }: NavProps) {
@@ -17,7 +17,7 @@ export default function Navigation({ variant }: NavProps) {
     switch (variant) {
       case 'footer':
         return css.navFooter;
-      // case 'header':
+      case 'header':
       case 'header-main-page':
         return css.navHeader;
       default:

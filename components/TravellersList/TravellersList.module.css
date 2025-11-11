@@ -14,29 +14,39 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  margin-bottom: 48px; /*перенести в таблет*/
 }
+
 .travellers__item {
-  border-radius: 16px;
-  padding: 24px;
   width: 335px;
   min-width: 250px;
+  padding: 24px;
+  border-radius: 16px;
   background: #e8eeff;
 }
 
 .traveller__name {
   display: block;
+  width: 100%;
   font-weight: 600;
   font-size: 18px;
-  line-height: 1.5; /*1.125*/
+  line-height: 1.5;
   margin-bottom: 16px;
-  width: 287px;
 }
 .traveller__text {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 16px;
+  height: 72px;
+
+  overflow: hidden;
+  display: -webkit-box;
+  display: box;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
 }
 
 .traveller__btn {
@@ -63,6 +73,7 @@
 
   .travellers__list {
     grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 48px;
   }
 
   .travellers__item {
@@ -100,6 +111,11 @@
   .travellers__title {
     font-size: 52px;
   }
+  .traveller__name {
+    width: 100%;
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
   .travellers__list {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -107,8 +123,42 @@
     width: 310px;
   }
   .traveller__text {
-    height: 100px;
+    height: 81px;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    text-overflow: ellipsis;
   }
+
+  .traveller__btn__more {
+    width: 173px;
+  }
+  /* ======== BUTTON HOVER / FOCUS ======== */
+  .traveller__btn,
+  .traveller__btn__more {
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .traveller__btn:hover,
+  .traveller__btn:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .traveller__btn__more:hover,
+  .traveller__btn__more:focus {
+    background-color: #3558c1;
+    border-color: #2d46a6;
+  }
+
   .traveller__btn__more {
     width: 173px;
   }

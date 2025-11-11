@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { api, ApiError } from '../../api';
+import { api, ApiError } from '../../apiTravellers';
 
 type Props = {
   params: Promise<{ id: string }>;

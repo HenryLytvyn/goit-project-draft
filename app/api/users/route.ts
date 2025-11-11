@@ -1,6 +1,6 @@
 //app/api/users/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { api, ApiError } from '../api';
+import { api, ApiError } from '../apiTravellers';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

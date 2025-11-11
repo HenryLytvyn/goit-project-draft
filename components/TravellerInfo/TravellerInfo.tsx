@@ -1,6 +1,6 @@
 // components/TravellerInfo/TravellerInfo.tsx
 import Image from 'next/image';
-import type { User } from '@/types/user';
+import type { User } from '@/types/userTravellers';
 import defaultStyles from '../TravellersList/TravellersList.module.css';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 // lib/api/serverApi.ts
 import axios, { AxiosError } from 'axios';
-import type { User } from '@/types/user';
+import type { User } from '@/types/userTravellers';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') + '/api';
 if (!BASE_URL) throw new Error('NEXT_PUBLIC_API_URL is not defined');
@@ -13,7 +13,7 @@ const api = axios.create({
 
 export interface GetUsersServerResponse {
   data: {
-    data: User[];
+    users: User[];
     page: number;
     perPage: number;
     totalItems: number;

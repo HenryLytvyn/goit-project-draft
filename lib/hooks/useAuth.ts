@@ -4,7 +4,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import {
   login as loginApi,
   register as registerApi,
-} from '@/lib/api/clientApi';
+} from '@/lib/api/clientApiTravellers';
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 
 export const useAuth = () => {

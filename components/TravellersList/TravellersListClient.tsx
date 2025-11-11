@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import type { User } from '@/types/user';
-import { getUsersClient } from '@/lib/api/clientApi';
+import type { User } from '@/types/userTravellers';
+import { getUsersClient } from '@/lib/api/clientApiTravellers';
 import Loader from '@/components/Loader/Loader';
 import TravellerInfo from '@/components/TravellerInfo/TravellerInfo';
 import Link from 'next/link';
@@ -10,9 +10,23 @@ import styles from './TravellersList.module.css';
 
 interface Props {
   initialUsers: User[];
-  perPage: number; // наприклад 4
-  totalPages: number;
-  initialPage?: number;
+  perPage: number; // кількість користувачів на сторінку (наприклад 4)
+  totalPages: number; // загальна кількість сторінок
+  initialPage?: number; // початкова сторінка (за замовчуванням 1)
+}
+
+export interface GetUsersClientResponse {
+  data: {
+    users: User[];
+    page: number;
+    perPage: number;
+    totalItems: number;
+    totalPages: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+  };
+  status: number;
+  message: string;
 }
 
 export default function TravellersListClient({
@@ -44,8 +58,11 @@ export default function TravellersListClient({
 
     try {
       const nextPage = page + 1;
-      const res = await getUsersClient({ page: nextPage, perPage: 12 }); // бекенд повертає 12
-      const newUsersFromServer = res?.data?.data ?? [];
+      const res = await getUsersClient({ page: nextPage, perPage: 12 }); // бекенд повертає до 12
+      console.log('[CLIENT LOAD MORE] API response:', res.data.users);
+
+      // Беремо масив користувачів з відповіді
+      const newUsersFromServer = res?.data?.users ?? [];
 
       // Якщо сервер повернув порожній масив → кінець сторінок
       if (newUsersFromServer.length === 0) {
@@ -53,13 +70,18 @@ export default function TravellersListClient({
         return;
       }
 
-      // беремо лише потрібну кількість (по 4)
+      // беремо лише потрібну кількість (perPage, наприклад 4)
       const newUsers = newUsersFromServer.slice(0, perPage);
 
       setUsers(prev => {
-        const existingIds = new Set(prev.map(u => u._id));
-        return [...prev, ...newUsers.filter(u => !existingIds.has(u._id))];
+        const existingIds = new Set(prev.map((u: User) => u._id));
+        return [
+          ...prev,
+          ...newUsers.filter((u: User) => !existingIds.has(u._id)),
+        ];
       });
+
+      console.log('[CLIENT LOAD MORE] New users added:', newUsers);
 
       if (newUsers.length < perPage || nextPage >= totalPages) {
         setHasMore(false);
@@ -76,7 +98,6 @@ export default function TravellersListClient({
 
   return (
     <>
-      {/* Додаємо нових користувачів тільки після SSR */}
       <ul className={styles.travellers__list}>
         {users.map(user => (
           <li key={user._id} className={styles.travellers__item}>

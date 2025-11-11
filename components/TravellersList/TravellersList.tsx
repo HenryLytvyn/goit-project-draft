@@ -1,6 +1,6 @@
 // components/TravellersList/TravellersList.tsx
-import { getUsersServer } from '@/lib/api/serverApi';
-import type { User } from '@/types/user';
+import { getUsersServer } from '@/lib/api/serverApiTravellers';
+import type { User } from '@/types/userTravellers';
 import TravellersListClient from './TravellersListClient';
 import styles from './TravellersList.module.css';
 
@@ -10,7 +10,7 @@ export default async function TravellersList() {
 
   try {
     const res = await getUsersServer(1, 4);
-    initialUsers = res.data.data ?? [];
+    initialUsers = res.data.users ?? [];
     totalPages = res.data.totalPages ?? 1;
   } catch (err) {
     console.error('Error fetching users:', err);

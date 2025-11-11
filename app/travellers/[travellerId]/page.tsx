@@ -1,5 +1,5 @@
 // app/travellers/[travellerId]/page.tsx
-import { getUserByIdServer } from '@/lib/api/serverApi';
+import { getUserByIdServer } from '@/lib/api/serverApiTravellers';
 import TravellerInfo from '@/components/TravellerInfo/TravellerInfo';
 import styles from './TravellerPage.module.css';
 

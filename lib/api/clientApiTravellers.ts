@@ -59,8 +59,8 @@
 //   }
 // };
 
-import { api } from './api';
-import { User, AuthResponse } from '@/types/user';
+import { api } from './apiTravellers';
+import { User, AuthResponse } from '@/types/userTravellers';
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { AxiosError } from 'axios';
 
@@ -205,7 +205,7 @@ export const getMe = async (): Promise<User> => {
 /*test OurTravelers*/
 export interface GetUsersClientResponse {
   data: {
-    data: User[];
+    users: User[];
     page: number;
     perPage: number;
     totalItems: number;

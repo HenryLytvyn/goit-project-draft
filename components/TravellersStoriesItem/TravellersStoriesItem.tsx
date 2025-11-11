@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { Story } from '@/types/story';
-import { addStoryToFavorites, removeStoryFromFavorites } from '@/lib/api/serverApi';
+import { addStoryToFavorites, removeStoryFromFavorites } from '@/lib/api/serverApiStories';
 import css from './TravellersStoriesItem.module.css';
 import { Icon } from '../Icon/Icon';
 
@@ -65,8 +65,12 @@ const normalFormatLocale = dateObject.toLocaleDateString();
       <div className={css.story__author}>
       <Image src={story.ownerId.avatarUrl} alt="Автор" width={48} height={48} className={css.story__avatar} />
       <div className={css.story__info}>
-        <p className={css.story__name}>{story.ownerId.name}</p>
-            <p className={css.story__meta}>{normalFormatLocale} •  <span className="favoriteCount">{favoriteCount}</span><Icon name="icon-bookmark" className={css.icon} /></p>
+            <p className={css.story__name}>{story.ownerId.name}</p>
+            <div className={css.meta}>
+               <span className={css.story__meta}>{normalFormatLocale}</span>
+  <span className={css.favoriteCount}>{favoriteCount}</span>
+  <Icon name="icon-bookmark" className={css.icon} />
+            </div>
       </div>
     </div>
 <div className={css.story__actions}>
@@ -81,9 +85,12 @@ const normalFormatLocale = dateObject.toLocaleDateString();
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className={css.story__save}
+              className={`${css.story__save} ${isSaved ? css.saved : ''}`}
             >
-              {isSaved ? <Icon name='icon-bookmark' className={css.story__save} /> : <Icon name='icon-bookmark' className={css.icon__bookmark} />}
+              <Icon
+              name="icon-bookmark"
+              className={`${isSaved ? css.icon__saved : css.icon__bookmark}`}
+            />
             </button>
            
           

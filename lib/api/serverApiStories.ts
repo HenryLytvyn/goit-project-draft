@@ -13,7 +13,11 @@ interface StoriesResponse {
 }
 
 
+
+
+
 export async function fetchStories(page = 1, perPage = 3): Promise<Story[]> {
+  
   const response = await api.get<StoriesResponse>(
     `/stories`, { params: { page, perPage, sort: 'favoriteCount' } }
   );

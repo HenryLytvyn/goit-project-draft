@@ -33,8 +33,6 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    margin-bottom: 24px;
-
 }
 
 
@@ -60,6 +58,7 @@ font-size: 16px;
     font-weight: 700;
     font-size: 18px;
     line-height: 1.5;
+    height: 3em;
     color: #000;
     margin-bottom: 8px;
 display: -webkit-box;
@@ -100,7 +99,7 @@ line-height: 1.5;
 .story__author {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .story__avatar {
@@ -119,22 +118,66 @@ line-height: 1.5;
     color: #000;
 }
 
+@media screen and (min-width: 1440px) {
+    .story__name {
+        font-size: 16px;
+    }
+}
+
+
+.meta {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+
+
 .story__meta {
-    font-size: 0.85rem;
-    color: var(--gray);
+font-family: var(--font-nunito-sans);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media screen and (min-width: 1440px) {
+    .story__meta {
+        font-size: 16px;
+    }
+}
+
+.favoriteCount{
+    font-family: var(--font-nunito-sans);
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1.5;
+    margin-right: 2px;
+}
+
+@media screen and (min-width: 1440px) {
+    .favoriteCount {
+        font-size: 16px;
+    }
+}
+
+.favoriteCount::before {
+    content: "•";
+    margin: 0 6px;
+    color: #555;
 }
 
 .icon{
     fill:#0a0a0a;
-    width: 10px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
 }
 
 .story__actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
-    margin-top: 12px;
+    
 }
 
 /* основная кнопка — как раньше */
@@ -153,6 +196,12 @@ line-height: 1.5;
         font-size: 16px;
         line-height: 1.5;
         color: #000
+}
+
+@media screen and (min-width: 1440px) {
+    .story__btn {
+        font-size: 18px;
+    }
 }
 
 .story__btn:hover,
@@ -178,15 +227,14 @@ line-height: 1.5;
     border: 1px solid #e6e9f2;
     cursor: pointer;
     transition: all 0.18s ease;
-    padding: 0;
-   
+    flex-shrink: 0;
 }
 
 /* иконка внутри */
 .story__save .icon__bookmark {
     color: #0a0a0a;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
 }
 
 .story__save:hover .icon__bookmark,

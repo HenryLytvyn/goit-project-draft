@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
   const page = searchParams.get('page') ?? '1';
 
   try {
-    const { data } = await api(`/users?page=${page}`);
+    const { data } = await api.get('/users', {
+      params: { page, perPage: searchParams.get('perPage') || '4' },
+    });
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(

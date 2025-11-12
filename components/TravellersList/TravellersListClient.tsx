@@ -122,7 +122,7 @@ export default function TravellersListClient({
               className={styles.traveller__btn__more}
               onClick={handleLoadMore}
             >
-              Показати ще
+              Переглянути всіх
             </button>
           )}
         </div>

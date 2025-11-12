@@ -24,6 +24,29 @@ export const login = async (data: LoginRequest) => {
 };
 
 /**
+ * Google OAuth — отримання URL для входу через Google
+ */
+export async function getGoogleAuthUrl(): Promise<string> {
+  const { data } = await api.get('/auth/google/get-oauth-url');
+  // сервер возвращает data.data.url, а не data.url
+  return data?.data?.url || '';
+}
+
+/**
+ * Підтвердження входу після редіректу з Google
+ */
+export const authConfirmGoogle = async (code: string) => {
+  try {
+    const res = await api.post<User>('/auth/google/confirm-oauth', { code });
+    const user = extractUser(res.data) as User | null;
+    return user;
+  } catch (error) {
+    console.error('❌ Google OAuth confirm error:', error);
+    throw error;
+  }
+};
+
+/**
  * Get current user
  */
 export const getMe = async (silent: boolean = false) => {
@@ -51,18 +74,11 @@ export const getMe = async (silent: boolean = false) => {
 
     return null;
   } catch (error) {
-    if (silent) {
-      // Тиха обробка - не логуємо помилку
-      return null;
-    }
-    const axiosError = error as AxiosError;
-    if (axiosError.response?.status === 401) {
-      // 401 - це очікувано, якщо користувач не залогінений
-      // Не логуємо як помилку
-      return null;
-    }
+    if (silent) return null;
 
-    // ✅ Логуємо інші помилки
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.status === 401) return null;
+
     console.error('❌ Error in getMe:', error);
     throw error;
   }
@@ -90,7 +106,6 @@ export const checkSession = async (): Promise<boolean> => {
     return response.status >= 200 && response.status < 300;
   } catch (error) {
     console.log('Session check failed:', error);
-
     return false;
   }
 };
@@ -99,11 +114,8 @@ export async function fetchStories(page = 1, perPage = 3): Promise<Story[]> {
   const response = await api.get<StoriesResponse>(`/stories`, {
     params: { page, perPage, sort: 'favoriteCount' },
   });
-  // console.log(response);
   return response.data?.data || [];
 }
-
-fetchStories(1, 3);
 
 export async function addStoryToFavorites(storyId: string): Promise<void> {
   await api.post(`/stories/${storyId}/favorite`);

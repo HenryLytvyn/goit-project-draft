@@ -2,11 +2,14 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export type ApiError = AxiosError<{ error: string }>;
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') + '/api';
+if (!BASE_URL) throw new Error('NEXT_PUBLIC_API_URL is not defined');
+
 /**
  * Client-side API instance
  */
 export const api = axios.create({
-  baseURL: '/api', // Next.js API routes
+  baseURL: BASE_URL, // Next.js API routes
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -51,7 +54,7 @@ api.interceptors.response.use(
     };
 
     // Don't retry refresh endpoint - avoid infinite loops
-    if (originalRequest.url?.includes('/auth/refresh')) {
+    if (originalRequest?.url?.includes('/auth/refresh')) {
       if (!originalRequest._isInitialization) {
         // Логуємо тільки якщо це не ініціалізація
       }
@@ -59,8 +62,8 @@ api.interceptors.response.use(
     }
     // Don't retry login/register endpoints
     if (
-      originalRequest.url?.includes('/auth/register') ||
-      originalRequest.url?.includes('/auth/login')
+      originalRequest?.url?.includes('/auth/register') ||
+      originalRequest?.url?.includes('/auth/login')
     ) {
       return Promise.reject(error);
     }

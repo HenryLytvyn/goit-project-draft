@@ -1,4 +1,4 @@
-import { User } from '@/types/user';
+import { User, GetUsersResponse } from '@/types/user';
 import { api } from './api';
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { extractUser } from './errorHandler';
@@ -111,4 +111,17 @@ export async function addStoryToFavorites(storyId: string): Promise<void> {
 
 export async function removeStoryFromFavorites(storyId: string): Promise<void> {
   await api.delete(`/stories/${storyId}/favorite`);
+}
+
+export async function getUsersClient({
+  page = 1,
+  perPage = 4,
+}: {
+  page: number;
+  perPage: number;
+}): Promise<GetUsersResponse> {
+  const res = await api.get<GetUsersResponse>('/users', {
+    params: { page, perPage },
+  });
+  return res.data;
 }

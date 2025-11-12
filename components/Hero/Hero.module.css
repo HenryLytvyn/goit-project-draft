@@ -81,9 +81,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 /* Normal state - вже визначено вище */
@@ -96,19 +94,21 @@
   color: #ffffff;
 }
 
+.cta:hover,
 .cta:focus {
-  outline: 2px solid #4169e1;
-  outline-offset: 2px;
+  background-color: #e8eeff;
+  transform: translateY(-1px);
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(84, 104, 231, 0.3);
 }
 
-/* Active state - значно темніший синій (майже navy) */
 .cta:active {
-  background-color: #1e3a8a;
-  border-color: #1e3a8a;
-  color: #ffffff;
+  transform: translateY(0);
+  color: #000000;
+  background-color: #7a96ea;
 }
 
-/* Disabled state - світлий фіолетовий/лавандовий фон, світлий сірий текст */
+/* Disabled state  */
 .cta:disabled {
   background-color: #e8e0f5;
   border-color: #e8e0f5;

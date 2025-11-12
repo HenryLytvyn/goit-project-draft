@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { api } from './api';
 import { User } from '@/types/user';
-import { Story } from '@/types/story';
 
 /**
  * Refresh session tokens (server-side)

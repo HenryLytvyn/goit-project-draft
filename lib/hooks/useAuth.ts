@@ -66,7 +66,7 @@ export const useAuth = () => {
       await logoutApi();
       toast.success('Ви вийшли з облікового запису');
       router.push('/');
-    } catch (error) {
+    } catch {
       logoutStore();
       if (typeof window !== 'undefined') {
         localStorage.removeItem('auth-storage');

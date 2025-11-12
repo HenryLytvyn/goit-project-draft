@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { api } from './api';
-import { User } from '@/types/user';
+import { User, GetUsersResponse } from '@/types/user';
+import { isAxiosError } from 'axios';
 
 /**
  * Refresh session tokens (server-side)
@@ -34,3 +35,25 @@ export const getServerMe = async () => {
   });
   return data;
 };
+
+export async function getUsersServer(
+  page = 1,
+  perPage = 4
+): Promise<GetUsersResponse> {
+  try {
+    const res = await api.get<GetUsersResponse>('/users', {
+      params: { page, perPage },
+    });
+    return res.data;
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      console.error('[getUsersServer error]', error.message);
+      throw new Error(
+        error.response?.data?.error || 'Failed to fetch users from server'
+      );
+    } else {
+      console.error('[getUsersServer unknown error]', error);
+      throw new Error('Unknown server error');
+    }
+  }
+}

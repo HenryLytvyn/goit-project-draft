@@ -7,6 +7,7 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import css from './Header.module.css';
 import MobileMenuBtn from '../MobileMenuBtn/MobileMenuBtn';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useState } from 'react';
 
 export default function Header() {
@@ -23,11 +24,14 @@ export default function Header() {
       <div className={`container ${css.headerContainer}`}>
         <Logo variant={isMainPage ? 'header-main-page' : undefined} />
         <Navigation variant={isMainPage ? 'header-main-page' : 'header'} />
-        <MobileMenuBtn
-          variant={isMainPage ? 'header-main-page' : undefined}
-          handleClick={handleMobileMenu}
-          isOpen={isMobileMenuOpen}
-        />
+        <div className={css.controls}>
+          <ThemeToggle variant={isMainPage ? 'header-main-page' : 'header'} />
+          <MobileMenuBtn
+            variant={isMainPage ? 'header-main-page' : undefined}
+            handleClick={handleMobileMenu}
+            isOpen={isMobileMenuOpen}
+          />
+        </div>
       </div>
     </header>
   );

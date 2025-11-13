@@ -12,7 +12,9 @@ if (!BASE_URL) throw new Error('NEXT_PUBLIC_API_URL is not defined');
  * Client-side API instance
  */
 export const api = axios.create({
-  baseURL: BASE_URL + '/api',
+
+  baseURL: '/api', // Next.js API routes
+
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -82,7 +84,16 @@ api.interceptors.response.use(
         message.includes('token is missing') ||
         message.includes('Session not found');
 
-      if (missingToken) return Promise.reject(error);
+
+      // If tokens are completely missing (not just expired), don't try to refresh
+      if (isMissingToken) {
+        return Promise.reject(error);
+      }
+      const isGetMeRequest = originalRequest?.url?.includes('/users/me');
+      if (isGetMeRequest) {
+        return Promise.reject(error);
+      }
+
 
       if (isRefreshing) {
         return new Promise((resolve, reject) => {

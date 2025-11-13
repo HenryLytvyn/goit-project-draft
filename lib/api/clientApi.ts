@@ -74,11 +74,18 @@ export const getMe = async (silent: boolean = false) => {
 
     return null;
   } catch (error) {
-    if (silent) return null;
-
+    if (silent) {
+      // Тиха обробка - не логуємо помилку
+      return null;
+    }
     const axiosError = error as AxiosError;
-    if (axiosError.response?.status === 401) return null;
+    if (axiosError.response?.status === 401) {
+      // 401 - це очікувано, якщо користувач не залогінений
+      // Не логуємо як помилку
+      return null;
+    }
 
+    // ✅ Логуємо інші помилки
     console.error('❌ Error in getMe:', error);
     throw error;
   }
@@ -106,6 +113,7 @@ export const checkSession = async (): Promise<boolean> => {
     return response.status >= 200 && response.status < 300;
   } catch (error) {
     console.log('Session check failed:', error);
+
     return false;
   }
 };
@@ -114,6 +122,7 @@ export async function fetchStories(page = 1, perPage = 3): Promise<Story[]> {
   const response = await api.get<StoriesResponse>(`/stories`, {
     params: { page, perPage, sort: 'favoriteCount' },
   });
+  // console.log(response);
   return response.data?.data || [];
 }
 

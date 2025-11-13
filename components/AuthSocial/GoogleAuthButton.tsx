@@ -16,7 +16,7 @@ export default function GoogleAuthButton() {
       } else {
         throw new Error('URL авторизації не знайдено');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('❌ Google auth init failed:', error);
       toast.error('Не вдалося отримати посилання для входу через Google');
     }
@@ -25,11 +25,7 @@ export default function GoogleAuthButton() {
   return (
     <div className={css.container}>
       <p className={css.orText}>або</p>
-      <button
-        type="button"
-        className={css.button}
-        onClick={handleGoogleLogin}
-      >
+      <button type="button" className={css.button} onClick={handleGoogleLogin}>
         <span className={css.buttonContent}>
           Увійти через Google
           <FaGoogle size={18} />

@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { api } from '@/app/api/api';
-import { User, GetUsersResponse } from '@/types/user';
+import { User, GetUsersResponse, GetUserByIdResponse } from '@/types/user';
 import { isAxiosError } from 'axios';
 
 /**
@@ -55,6 +55,25 @@ export async function getUsersServer(
     const res = await api.get<GetUsersResponse>('/users', {
       params: { page, perPage },
     });
+    return res.data;
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      console.error('[getUsersServer error]', error.message);
+      throw new Error(
+        error.response?.data?.error || 'Failed to fetch users from server'
+      );
+    } else {
+      console.error('[getUsersServer unknown error]', error);
+      throw new Error('Unknown server error');
+    }
+  }
+}
+
+export async function getUserByIdServer(
+  userId: string
+): Promise<GetUserByIdResponse> {
+  try {
+    const res = await api.get<GetUserByIdResponse>(`/users/${userId}`);
     return res.data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {

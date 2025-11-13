@@ -9,8 +9,12 @@ import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 import BreakpointInitializer from '@/components/Providers/BreakpointInitializer';
+
+import RootPageClient from './RootPage.client';
+
 import { getServerMe } from '@/lib/api/serverApi';
 import { User } from '@/types/user';
+
 
 const nunitoSans = Nunito_Sans({
   subsets: ['cyrillic'],
@@ -98,11 +102,17 @@ export default async function RootLayout({
                       secondary: 'var(--color-text-primary)',
                     },
                   },
-                }}
-              />
-            </AuthProvider>
-          </TanStackProvider>
+
+                },
+              }}
+            />
+            <RootPageClient />
+          </AuthProvider>
+        </TanStackProvider>
+
+
         </ThemeProvider>
+
       </body>
     </html>
   );

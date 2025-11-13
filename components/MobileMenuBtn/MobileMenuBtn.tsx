@@ -13,11 +13,14 @@ export default function MobileMenuBtn({
   isOpen,
   variant,
 }: MobileMenuBtnProps) {
+  if (variant === 'header-main-page' && isOpen) {
+    variant = undefined;
+  }
   return (
     <button
       onClick={handleClick}
       className={`${css.button} ${variant === 'header-main-page' ? css.buttonMainPage : ''}`}
-      aria-label="Menu"
+      aria-label="Меню"
     >
       <div
         className={`${css.navIcon} ${variant === 'header-main-page' ? css.navIconMainPage : ''} ${isOpen ? css.open : ''}`}

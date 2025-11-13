@@ -5,14 +5,22 @@
   gap: 3px;
 
   padding: 6px 10px;
+  width: 167px;
 
   border: 1px solid transparent;
   border-radius: 8px;
 
   background-color: transparent;
+
+  position: absolute;
+  top: -16px;
+  left: 0;
+  transform: translateX(0);
+
   transition:
     border 250ms ease,
-    background-color 250ms ease;
+    background-color 250ms ease,
+    transform 500ms ease;
 }
 
 .logoLink:hover,
@@ -40,6 +48,8 @@
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: #000;
+
+  transition: color 250ms ease;
 }
 
 .logoTextHeaderMain {
@@ -51,6 +61,11 @@
     margin-bottom: 41px;
     grid-row: 1;
     grid-column: 1;
+  }
+
+  .logoLinkMobileMenuOpen {
+    transform: translateX(380px);
+    /* background-color: red; */
   }
 }
 

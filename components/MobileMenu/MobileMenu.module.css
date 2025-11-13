@@ -1,11 +1,53 @@
-.mobileMenu {
-  /* width: 100vw; */
-  height: 100vh;
-  padding-top: 88px;
+.mobileMenuContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
 }
 
-@media screen and (max-width: 767.98) {
+.mobileMenuContainer.open {
+  pointer-events: all;
+}
+
+.mobileMenuWrapper {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.mobileMenu {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  transition: transform 500ms ease;
+  transform: translateX(100%);
+  padding-top: 88px;
+  z-index: 9;
+}
+
+.mobileMenu.open {
+  transform: translateX(0%);
+}
+
+@media screen and (min-width: 768px) {
+  .mobileMenuWrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 768px;
+    height: 454px;
+  }
+
   .mobileMenu {
-    width: 335px;
+    width: 375px;
+    height: auto;
+    padding-bottom: 88px;
+    left: calc(100% - 375px);
+    right: auto;
   }
 }

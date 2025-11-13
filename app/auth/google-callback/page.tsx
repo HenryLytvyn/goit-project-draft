@@ -19,20 +19,22 @@ export default function GoogleCallbackPage() {
     }
 
     const confirmGoogleLogin = async () => {
+      const loadingId = toast.loading('Входимо через Google...');
+
       try {
-        toast.loading('Входимо через Google...');
         const user = await authConfirmGoogle(code);
 
-        if (user) {
-          toast.dismiss();
-          toast.success(`Вітаємо, ${user.name || 'мандрівнику'}!`);
-          router.replace('/profile'); // 👈 редирект куди після входу
-        } else {
+        if (!user) {
           throw new Error('Користувача не знайдено');
         }
+
+        toast.dismiss(loadingId);
+        toast.success(`Вітаємо, ${user.name || 'мандрівнику'}!`);
+
+        router.replace('/'); // ← тепер точно перенаправляє на головну
       } catch (error) {
-        console.error('❌ Помилка при підтвердженні Google входу:', error);
-        toast.dismiss();
+        console.error('❌ Google OAuth error:', error);
+        toast.dismiss(loadingId);
         toast.error('Не вдалося увійти через Google');
         router.replace('/auth/login');
       }

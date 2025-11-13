@@ -42,7 +42,7 @@ export const getServerMe = async (): Promise<User | null> => {
       },
     });
     return data;
-  } catch (error) {
+  } catch {
     return null;
   }
 };

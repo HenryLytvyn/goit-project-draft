@@ -60,7 +60,7 @@ export default async function RootLayout({
   let initialUser: User | null = null;
   try {
     initialUser = await getServerMe();
-  } catch (error) {
+  } catch {
     // Якщо помилка (401, 403, тощо), користувач не залогінений
     initialUser = null;
   }

@@ -5,6 +5,7 @@ import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import { Nunito_Sans } from 'next/font/google';
 import { Sora } from 'next/font/google';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
+import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 import BreakpointInitializer from '@/components/Providers/BreakpointInitializer';
@@ -68,37 +69,40 @@ export default async function RootLayout({
   return (
     <html lang="uk">
       <body className={`${nunitoSans.variable} ${sora.variable}`}>
-        <BreakpointInitializer />
-        <TanStackProvider>
-          <AuthProvider initialUser={initialUser}>
-            {children}
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  background: '#363636',
-                  color: '#fff',
-                  fontFamily: 'var(--font-nunito-sans), sans-serif',
-                },
-                success: {
-                  duration: 3000,
-                  iconTheme: {
-                    primary: '#4169e1',
-                    secondary: '#fff',
+        <ThemeProvider>
+          <BreakpointInitializer />
+          <TanStackProvider>
+            <AuthProvider initialUser={initialUser}>
+              {children}
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  duration: 4000,
+                  style: {
+                    background: 'var(--color-bg-secondary)',
+                    color: 'var(--color-text-primary)',
+                    fontFamily: 'var(--font-nunito-sans), sans-serif',
+                    border: '1px solid var(--color-border)',
                   },
-                },
-                error: {
-                  duration: 5000,
-                  iconTheme: {
-                    primary: '#b00101',
-                    secondary: '#fff',
+                  success: {
+                    duration: 3000,
+                    iconTheme: {
+                      primary: 'var(--color-primary)',
+                      secondary: 'var(--color-text-primary)',
+                    },
                   },
-                },
-              }}
-            />
-          </AuthProvider>
-        </TanStackProvider>
+                  error: {
+                    duration: 5000,
+                    iconTheme: {
+                      primary: 'var(--color-error)',
+                      secondary: 'var(--color-text-primary)',
+                    },
+                  },
+                }}
+              />
+            </AuthProvider>
+          </TanStackProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

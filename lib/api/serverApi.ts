@@ -7,6 +7,7 @@ import {
   GetStoriesResponse,
 } from '@/types/user';
 import { isAxiosError } from 'axios';
+import { FetchStoriesOptions, StoriesResponse, Story, StoryByIdResponse } from '@/types/story';
 /**
  * Refresh session tokens (server-side)
  */
@@ -101,3 +102,19 @@ export async function getStoriesServer(
   });
   return res.data;
 }
+
+export const fetchStoryByIdServer = async (storyId: string): Promise<Story> => {
+  const res = await api.get<StoryByIdResponse>(`/stories/${storyId}`);
+  return res.data.data;
+};
+
+export const fetchStoriesServer = async ({
+  page,
+  perPage,
+  excludeId,
+}: FetchStoriesOptions): Promise<StoriesResponse> => {
+  const res = await api.get<StoriesResponse>('/stories', {
+    params: { page, perPage, excludeId },
+  });
+  return res.data;
+};

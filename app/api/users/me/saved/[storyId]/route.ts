@@ -5,11 +5,11 @@ import { api } from '../../../../api';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { storyId: string } }
+  { params }: { params: Promise<{ storyId: string }> }
 ) {
   try {
     const cookieStore = cookies();
-    const { storyId } = params;
+    const { storyId } = await params;
 
     const res = await api.post(`/users/me/saved/${storyId}`, null, {
       headers: {
@@ -34,11 +34,11 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { storyId: string } }
+  { params }: { params: Promise<{ storyId: string }> }
 ) {
   try {
     const cookieStore = cookies();
-    const { storyId } = params;
+    const { storyId } = await params;
 
     const res = await api.delete(`/users/me/saved/${storyId}`, {
       headers: {

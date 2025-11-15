@@ -71,7 +71,13 @@ export default function ProfileAndLogoutLinks({
         className={css.profileLink}
       >
         {userAvatar ? (
-          <Image src={userAvatar} alt={userName} className={css.avatar} />
+          <Image
+            src={userAvatar}
+            alt={userName}
+            className={css.avatar}
+            width={32}
+            height={32}
+          />
         ) : (
           <Icon name="avatar" className={css.avatar} />
         )}

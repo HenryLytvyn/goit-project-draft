@@ -93,7 +93,7 @@ export default function ProfilePage() {
       };
     } else {
       return {
-        text: 'У вас немає збережених історій, мершій збережіть ващу першу історію!',
+        text: 'У вас немає збережених історій, мершій збережіть вашу першу історію!',
         buttonText: 'До історій',
         redirectPath: '/stories',
       };

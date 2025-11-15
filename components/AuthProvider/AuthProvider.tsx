@@ -45,7 +45,7 @@ const AuthProvider = ({ children, initialUser = null }: Props) => {
             // Сесія неактивна - очищаємо
             clearIsAuthenticated();
           }
-        } catch (error) {
+        } catch {
           // Помилка при перевірці - очищаємо
           clearIsAuthenticated();
         }
@@ -59,7 +59,14 @@ const AuthProvider = ({ children, initialUser = null }: Props) => {
     };
 
     fetchSession();
-  }, [initialUser, clearIsAuthenticated, setUser, setLoading, isInitialized, user]);
+  }, [
+    initialUser,
+    clearIsAuthenticated,
+    setUser,
+    setLoading,
+    isInitialized,
+    user,
+  ]);
 
   return <>{children}</>;
 };

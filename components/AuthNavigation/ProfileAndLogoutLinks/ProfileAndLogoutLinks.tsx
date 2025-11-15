@@ -7,6 +7,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import { useAuthStore } from '@/lib/store/authStore';
 import { useState } from 'react';
 import { useMobileMenuOpen } from '@/lib/store/MobileMenuStore';
+import Image from 'next/image';
 
 type ProfileAndLogoutLinksProps = {
   variant?: 'header-main-page' | 'mobile-menu';
@@ -70,7 +71,7 @@ export default function ProfileAndLogoutLinks({
         className={css.profileLink}
       >
         {userAvatar ? (
-          <img src={userAvatar} alt={userName} className={css.avatar} />
+          <Image src={userAvatar} alt={userName} className={css.avatar} />
         ) : (
           <Icon name="avatar" className={css.avatar} />
         )}

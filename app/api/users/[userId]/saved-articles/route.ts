@@ -9,11 +9,11 @@ import { logErrorResponse } from '../../../_utils/utils';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     const cookieStore = await cookies();
-    const userId = params.userId;
+    const { userId } = await params;
 
     const res = await api.get(`/users/${userId}/saved-articles`, {
       headers: {

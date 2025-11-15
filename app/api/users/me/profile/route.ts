@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { api } from '../../../api';
 import { cookies } from 'next/headers';
 import { isAxiosError } from 'axios';
@@ -8,7 +8,7 @@ import { logErrorResponse } from '../../../_utils/utils';
  * GET /api/users/me/profile
  * Отримати профіль поточного користувача з його статтями
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const cookieStore = await cookies();
 
@@ -34,4 +34,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

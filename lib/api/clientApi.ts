@@ -1,6 +1,7 @@
 import { User, GetUsersResponse, GetUserByIdResponse } from '@/types/user';
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { extractUser } from './errorHandler';
+
 import { SavedStory, StoriesResponse, Story, StoryByIdResponse, UserSavedArticlesResponse } from '@/types/story';
 import { AxiosError, isAxiosError } from 'axios';
 import { api } from '../api/api';
@@ -24,6 +25,20 @@ export const register = async (data: RegisterRequest) => {
 export const login = async (data: LoginRequest) => {
   const res = await api.post<User>('/auth/login', data);
   const user = extractUser(res.data) as User | null;
+
+  const userIdInfo =
+    user && typeof user === 'object'
+      ? {
+          id: 'id' in user ? String(user.id) : undefined,
+          _id: '_id' in user ? String(user._id) : undefined,
+        }
+      : { id: undefined, _id: undefined };
+
+  console.log('🟢 ПІСЛЯ extractUser - user:', user);
+  console.log('🟢 user.id:', userIdInfo.id);
+  console.log('🟢 user._id:', userIdInfo._id);
+  console.log('🟢 res.data:', res.data);
+
   return user;
 };
 
@@ -176,20 +191,23 @@ export async function fetchStoryByIdClient(storyId: string): Promise<Story> {
 
 
 
+
 export async function fetchSavedStoriesByUserId(
   userId: string
 ): Promise<SavedStory[]> {
   console.log("fetchSavedStoriesByUserId CALL with userId:", userId);
 
+
   const res = await api.get<UserSavedArticlesResponse>(
     `/users/${userId}/saved-articles`
   );
 
+
   console.log("fetchSavedStoriesByUserId RESPONSE:", res.data.data.savedStories);
+
 
   return res.data.data.savedStories;
 }
-
 
 
 /**

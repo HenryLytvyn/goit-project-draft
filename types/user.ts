@@ -1,4 +1,4 @@
-import { Story } from "./story";
+
 
 export type User = {
   _id: string;

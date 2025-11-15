@@ -118,19 +118,19 @@ export const checkSession = async (): Promise<boolean> => {
   }
 };
 
-export async function fetchStories(page = 1, perPage = 3): Promise<Story[]> {
+export async function fetchStories(page = 1, perPage = 3, categoryId?: string): Promise<Story[]> {
   const response = await api.get<StoriesResponse>(`/stories`, {
-    params: { page, perPage, sort: 'favoriteCount' },
+    params: { page, perPage, sort: 'favoriteCount', category: categoryId },
   });
   return response.data?.data || [];
 }
 
 export async function addStoryToFavorites(storyId: string): Promise<void> {
-  await api.post(`/me/saved/${storyId}`);
+  await api.post(`/users/me/saved/${storyId}`);
 }
 
 export async function removeStoryFromFavorites(storyId: string): Promise<void> {
-  await api.delete(`/me/saved/${storyId}`);
+  await api.delete(`/users/me/saved/${storyId}`);
 }
 
 export async function getUsersClient({

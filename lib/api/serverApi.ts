@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers';
 import { api } from '@/app/api/api';
-import {
-  User,
+ import{ User,
   GetUsersResponse,
   GetUserByIdResponse,
   GetStoriesResponse,
 } from '@/types/user';
 import { isAxiosError } from 'axios';
+import { Story, StoriesResponse } from '@/types/story';
 /**
  * Refresh session tokens (server-side)
  */
@@ -100,4 +100,15 @@ export async function getStoriesServer(
     params: { page, perPage },
   });
   return res.data;
+}
+
+
+export async function fetchStoriesServer(
+  page: number = 1,
+  perPage: number = 10
+): Promise<Story[]> {
+  const response = await api.get<StoriesResponse>(`/stories`, {
+    params: { page, perPage, sort: 'favoriteCount' },
+  });
+  return response.data?.data || [];
 }

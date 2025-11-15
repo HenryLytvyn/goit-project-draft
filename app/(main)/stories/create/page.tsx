@@ -9,7 +9,7 @@ export default function AddStoryPage() {
     <ProtectedRoute>
       <div className="container">
         <h1 className={css.mainTitle}>Створити нову історію</h1>
-        <AddStoryForm />
+        <AddStoryForm variant="create-story" />
       </div>
     </ProtectedRoute>
   );

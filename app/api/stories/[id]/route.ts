@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 import { api } from '../../api';
 import { cookies } from 'next/headers';
@@ -9,12 +10,14 @@ import { logErrorResponse } from '../../_utils/utils';
  */
 export async function GET(
   request: NextRequest,
+
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const cookieStore = await cookies();
     const { id } = await params;
     const storyId = id;
+
 
     const res = await api.get(`/stories/${storyId}`, {
       headers: {
@@ -37,4 +40,4 @@ export async function GET(
       { status: 500 }
     );
   }
-}
+

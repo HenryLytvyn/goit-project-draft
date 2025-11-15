@@ -37,8 +37,30 @@ export default function ProfileAndLogoutLinks({
   };
 
   // Отримуємо ім'я користувача або дефолтне значення
-  const userName = user?.name || 'Користувач';
-  const userAvatar = user?.avatarUrl;
+  let userName = 'Користувач';
+  if (user) {
+    if (
+      'data' in user &&
+      typeof user.data === 'object' &&
+      user.data !== null &&
+      'name' in user.data
+    ) {
+      userName = (user.data as { name: string }).name;
+    } else if ('name' in user && typeof user.name === 'string') {
+      // Якщо це валідний User об'єкт
+      userName = user.name;
+    }
+  }
+  const userAvatar =
+    user && 'avatarUrl' in user
+      ? user.avatarUrl
+      : user &&
+          'data' in user &&
+          typeof user.data === 'object' &&
+          user.data !== null &&
+          'avatarUrl' in user.data
+        ? (user.data as { avatarUrl?: string }).avatarUrl
+        : undefined;
 
   return (
     <div className={css.container}>

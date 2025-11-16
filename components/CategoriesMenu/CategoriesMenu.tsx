@@ -12,14 +12,41 @@ interface Props {
 export default function CategoriesMenu({ categories, value, onChange }: Props) {
     
   return (
-      <select className={css.select} value={value} onChange={(e) => onChange(e.target.value)} 
+    <>
+      <div className="mobileMenu">
+         <label htmlFor="categorySelect" className={css.label}>
+          Категорії
+        </label>
+        <div className="select_wrapper">
+      <select id="categorySelect" className={css.select} value={value} onChange={(e) => onChange(e.target.value)} 
          >
-         <option value='all'>Всі історії</option>   
+         <option className="category_name" value='all'>Всі історії</option>   
          {categories.map(cat => (
-        <option key={cat._id} value={cat._id}>
+        <option className="category_name" key={cat._id} value={cat._id}>
           {cat.name}
         </option>
       ))}
-    </select>
+          </select>
+          </div>
+    </div>
+     <div className={css.buttonsWrapper}>
+      <button
+        className={`${css.categoryBtn} ${value === "all" ? css.active : ""}`}
+        onClick={() => onChange("all")}
+      >
+        Всі історії
+      </button>
+
+      {categories.map((cat) => (
+        <button
+          key={cat._id}
+          className={`${css.categoryBtn} ${value === cat._id ? css.active : ""}`}
+          onClick={() => onChange(cat._id)}
+        >
+          {cat.name}
+        </button>
+      ))}
+      </div>
+      </>
   );
 }

@@ -7,6 +7,7 @@ import { fetchStories } from '@/lib/api/clientApi';
 import { Story } from '@/types/story';
 import { useBreakpointStore } from '@/lib/store/breakpointStore';
 import { useAuthStore } from '@/lib/store/authStore';
+import Loader from '@/components/Loader/Loader';
 
 interface PopularClientProps{
   initialStories: Story[];
@@ -84,6 +85,7 @@ export default function PopularClient({initialStories}: PopularClientProps) {
               className={css.stories__more}
             >
               {loading ? 'Завантаження...' : 'Переглянути всі'}
+              {loading && page > 1 && <Loader />}
             </button>
           </div>
         )}

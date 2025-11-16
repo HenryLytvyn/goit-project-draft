@@ -7,6 +7,8 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Image from 'next/image';
 import { SaveStoryButton } from './SaveStoryButton/SaveStoryButton';
+import css from "./StoryDetailsClient.module.css"
+
 
 export const StoryDetailsClient = () => {
   const { storyId } = useParams<{ storyId: string }>();
@@ -48,20 +50,41 @@ export const StoryDetailsClient = () => {
 
   return (
     <>
-      <div>
-        <p>HISTORY</p>
-        <h1>{story.title}</h1>
+      <section className={css.storyDetails}>
+        <div className='container'>
+        <h1 className={css.title}>{story.title}</h1>
+        <div className={css.wrapper}>
+        <p className={css.text}>Автор статті <span className={css.addText}>{story.ownerId.name}</span></p>
+        <p className={css.text}>Опубліковано <span className={css.addText}>{story.date}</span></p>
+        <p className={css.textCategory}>{story.category.name}</p>
+        </div>
         <Image
-          className="story-card-image"
+          className={css.storyCardImage}
           src={story.img}
           alt={story.title}
-          width={416}
-          height={277.11}
-        />
-        <h2>{story.ownerId.name}</h2>
-      </div>
-
-      <SaveStoryButton storyId={story._id} initiallySaved={initiallySaved} />
+          width={1312}
+          height={874}        
+          />
+        <div className={css.wrapperButton}>
+        <p className={css.mainText}>{story.article}</p>
+          <div className={css.saveStory}>
+         {initiallySaved 
+         ? (<>
+            <p className={css.titleStory}>Історія вже була збережена</p>
+            <p className={css.textStory}>Вона доступна у вашому профілі у розділі збережене</p>
+          </>
+    )
+        : (<>
+            <p className={css.titleStory}>Збережіть собі історію</p>
+            <p className={css.textStory}>Вона буде доступна у вашому профілі у розділі збережене</p>
+          </>
+    )}
+    <SaveStoryButton storyId={story._id} initiallySaved={initiallySaved} />
+          </div>
+          </div>
+        </div>
+      </section>
+    
     </>
   );
 };

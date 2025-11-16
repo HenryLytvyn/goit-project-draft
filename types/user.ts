@@ -1,4 +1,7 @@
 
+import { SavedStory } from "./story";
+
+
 export type User = {
   _id: string;
   email?: string;
@@ -72,4 +75,19 @@ export interface GetStoriesResponse {
   perPage: number;
   totalPages: number;
   totalItems: number;
+}
+
+export interface UserSavedArticlesResponse {
+  status: number;
+  message: string;
+  data: {
+    user: {
+      _id: string;
+      name: string;
+      avatarUrl: string;
+      description: string;
+      createdAt: string;
+    };
+    savedStories: SavedStory[];
+  };
 }

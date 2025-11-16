@@ -28,7 +28,6 @@ export default function TravellersStoriesItem({
   const [favoriteCount, setFavoriteCount] = useState(story.favoriteCount);
 
 
-
   const handleSave = async () => {
     if (!isAuthenticated) {
       router.push('/auth/register');

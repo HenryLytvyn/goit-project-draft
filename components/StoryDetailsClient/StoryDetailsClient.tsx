@@ -40,7 +40,6 @@ export const StoryDetailsClient = () => {
     refetchOnReconnect: false,
   });
 
-  console.log(`savedStories`, savedStories);
   if (isStoryLoading || isSavedLoading) return <Loader />;
   if (storyError || !story) return <ErrorMessage />;
 

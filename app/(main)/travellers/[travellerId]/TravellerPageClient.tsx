@@ -7,7 +7,6 @@ import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
 import type { User, BackendArticleFromUser } from '@/types/user';
 import type { Story } from '@/types/story';
 import { getArticlesByUserClient } from '@/lib/api/clientApi';
-import { useQuery } from '@tanstack/react-query';
 import styles from './TravellerPage.module.css';
 
 interface Props {
@@ -139,7 +138,7 @@ export default function TravellerPageClient({
       <MessageNoStories
         text="У цього користувача ще немає історій."
         buttonText="Створити історію"
-        redirectPath="/stories/create"
+        route="/stories/create"
       />
     );
   }
@@ -148,7 +147,11 @@ export default function TravellerPageClient({
 
   return (
     <>
-      <TravellersStories stories={stories} isAuthenticated={false} />
+      <TravellersStories
+        stories={stories}
+        isAuthenticated={false}
+        className={styles.travellerPageStoriesList}
+      />
 
       {hasMore && stories.length > 0 && (
         <div className={styles.loadMoreWrapper}>
@@ -156,11 +159,11 @@ export default function TravellerPageClient({
             <Loader className={styles.loader} />
           ) : (
             <button
-              className={styles.traveller__btn__more}
+              className={`${styles.traveller__btn__more} ${styles.myCustomBtnLoadMore}`}
               onClick={handleLoadMore}
               disabled={loading}
             >
-              Показати ще
+              Переглянути ще
             </button>
           )}
         </div>

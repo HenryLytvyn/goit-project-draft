@@ -40,6 +40,8 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
             useDefaultStyles={false}
             priority
             className={{
+              travellerInfoWraper: styles.travellerInfoWraper,
+              image: styles.image,
               wrapper: styles.wrapperContent,
               container: styles.travellerContainer,
               name: styles.travellerName,
@@ -47,6 +49,8 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
             }}
             imageSize={{ width: 199, height: 199 }}
           />
+
+          <h2 className={styles.travellerStoriesTitle}>Історії Мандрівника</h2>
 
           <HydrationBoundary state={dehydrate(queryClient)}>
             <TravellerPageClient

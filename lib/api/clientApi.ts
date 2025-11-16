@@ -1,11 +1,9 @@
-
 import {
   User,
   GetUsersResponse,
   GetUserByIdResponse,
   GetArticlesResponse,
   ArticlesWithPagination,
-  PaginationData,
 } from '@/types/user';
 
 import { LoginRequest, RegisterRequest } from '@/types/auth';
@@ -185,43 +183,13 @@ export async function getArticlesByUserClient(
   perPage: number
 ): Promise<GetArticlesResponse> {
   try {
-    console.log(`[getArticlesByUserClient] Starting request:`, {
-      travellerId,
-      page,
-      perPage,
-      timestamp: new Date().toISOString(),
-    });
-
     const url = `/users/${travellerId}`;
-    console.log(`[getArticlesByUserClient] Request URL: ${url}`);
-
     const res = await api.get<GetUserByIdResponse>(url, {
       params: { page, perPage },
     });
 
-    console.log(`[getArticlesByUserClient] Response received:`, {
-      status: res.status,
-      statusText: res.statusText,
-      dataStructure: {
-        hasData: !!res.data,
-        hasUser: !!res.data?.data?.user,
-        hasArticles: !!res.data?.data?.articles,
-        articlesType: typeof res.data?.data?.articles,
-        articlesIsArray: Array.isArray(res.data?.data?.articles),
-      },
-      articlesCount: res.data?.data?.articles?.items?.length || 0,
-    });
-
     const articles: ArticlesWithPagination = res.data.data.articles;
     const totalArticles = articles.pagination.totalItems;
-
-    console.log(`[getArticlesByUserClient] Request successful:`, {
-      user: res.data.data.user.name,
-      articlesCount: articles.items.length,
-      totalArticles,
-      pagination: articles.pagination,
-    });
-
     return {
       user: res.data.data.user,
       articles: articles,
@@ -231,33 +199,6 @@ export async function getArticlesByUserClient(
     console.error('[getArticlesByUserClient] Full error details:', error);
 
     if (isAxiosError(error)) {
-      console.error('[getArticlesByUserClient] Axios error details:', {
-        status: error.response?.status,
-        statusText: error.response?.statusText,
-        data: error.response?.data,
-        url: error.config?.url,
-        method: error.config?.method,
-        params: error.config?.params,
-        headers: error.config?.headers,
-      });
-
-      // Додамо перевірку на 500 помилку
-      if (error.response?.status === 500) {
-        console.error(
-          '[getArticlesByUserClient] Server 500 error - possible backend issue'
-        );
-
-        // Можна додати додаткову інформацію для дебагу
-        const errorData = error.response?.data;
-        if (errorData) {
-          console.error('[getArticlesByUserClient] Server error response:', {
-            error: errorData.error,
-            message: errorData.message,
-            details: errorData.details,
-          });
-        }
-      }
-
       throw new Error(
         error.response?.data?.error ||
           `Request failed with status code ${error.response?.status}`
@@ -272,23 +213,6 @@ export async function getArticlesByUserClient(
     }
   }
 }
-
-// export async function getUserByIdClient(
-//   userId: string
-// ): Promise<GetUserByIdResponse['data']> {
-//   try {
-//     const res = await api.get<GetUserByIdResponse>(`/users/${userId}`);
-//     return res.data.data;
-//   } catch (error: unknown) {
-//     if (isAxiosError(error)) {
-//       console.error('[getUserByIdClient error]', error.message);
-//       throw new Error(error.response?.data?.error || 'Failed to fetch user');
-//     } else {
-//       console.error('[getUserByIdClient unknown error]', error);
-//       throw new Error('Unknown server error');
-//     }
-//   }
-// }
 
 /*end Haievoi Serhii*/
 export async function fetchStoryByIdClient(storyId: string): Promise<Story> {
@@ -410,4 +334,3 @@ export async function fetchSavedStoriesMe(): Promise<SavedStory[]> {
   );
   return res.data.data.savedStories;
 }
-

@@ -6,7 +6,6 @@ import {
   GetUserByIdResponse,
   GetArticlesResponse,
   ArticlesWithPagination,
-  PaginationData,
 } from '@/types/user';
 import { isAxiosError } from 'axios';
 
@@ -18,7 +17,6 @@ import {
   Story,
   StoryByIdResponse,
 } from '@/types/story';
-
 
 // Normalize backend user payload to always contain `_id`
 function normalizeUserId(
@@ -36,7 +34,6 @@ function normalizeUserId(
   }
   return rec;
 }
-
 
 /**
  * Refresh session tokens (server-side)
@@ -80,9 +77,9 @@ export const getServerMe = async (): Promise<User | null> => {
     // Backend often responds as { status, message, data: {...user} }
     const payload =
       data && typeof data === 'object'
-        ? (('data' in (data as Record<string, unknown>))
-            ? (data as { data: unknown }).data
-            : data)
+        ? 'data' in (data as Record<string, unknown>)
+          ? (data as { data: unknown }).data
+          : data
         : null;
 
     const normalized = normalizeUserId(payload) as User | null;
@@ -196,7 +193,6 @@ export async function fetchStoriesServer(
   return response.data?.data || [];
 }
 
-
 export async function fetchCategories(): Promise<Category[]> {
   const res = await api.get<CategoriesResponse>('/categories');
   return res.data.data;
@@ -213,4 +209,3 @@ export const fetchSavedStoriesMeServer = async () => {
 
   return res.data.data.savedStories;
 };
-

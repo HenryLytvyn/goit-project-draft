@@ -11,11 +11,32 @@ import {
 import { isAxiosError } from 'axios';
 
 import {
+  CategoriesResponse,
+  Category,
   FetchStoriesOptions,
   StoriesResponse,
   Story,
   StoryByIdResponse,
 } from '@/types/story';
+
+
+// Normalize backend user payload to always contain `_id`
+function normalizeUserId(
+  obj: Record<string, unknown> | null | undefined
+): Record<string, unknown> | null | undefined {
+  if (!obj || typeof obj !== 'object') return obj;
+  const rec = obj as Record<string, unknown>;
+  const idFromUnderscore =
+    typeof rec._id === 'string' ? (rec._id as string) : undefined;
+  const idFromId = typeof rec.id === 'string' ? (rec.id as string) : undefined;
+  const resolvedId = idFromUnderscore ?? idFromId;
+  if (resolvedId && resolvedId !== rec._id) {
+    // do not mutate caller object
+    return { ...rec, _id: resolvedId };
+  }
+  return rec;
+}
+
 
 /**
  * Refresh session tokens (server-side)
@@ -50,12 +71,22 @@ export const getServerMe = async (): Promise<User | null> => {
       return null;
     }
 
-    const { data } = await api.get<User>('/users/me/profile', {
+    const { data } = await api.get('/users/me/profile', {
       headers: {
         Cookie: cookieStore.toString(),
       },
     });
-    return data;
+
+    // Backend often responds as { status, message, data: {...user} }
+    const payload =
+      data && typeof data === 'object'
+        ? (('data' in (data as Record<string, unknown>))
+            ? (data as { data: unknown }).data
+            : data)
+        : null;
+
+    const normalized = normalizeUserId(payload) as User | null;
+    return (normalized as User) ?? null;
   } catch {
     return null;
   }
@@ -154,10 +185,32 @@ export const fetchStoriesServerDup = async ({
 
 export async function fetchStoriesServer(
   page: number = 1,
-  perPage: number = 10
+  perPage: number = 10,
+
+  excludeId?: string
 ): Promise<Story[]> {
   const response = await api.get<StoriesResponse>(`/stories`, {
-    params: { page, perPage, sort: 'favoriteCount' },
+    params: { page, perPage, sort: 'favoriteCount', excludeId },
   });
+
   return response.data?.data || [];
 }
+
+
+export async function fetchCategories(): Promise<Category[]> {
+  const res = await api.get<CategoriesResponse>('/categories');
+  return res.data.data;
+}
+
+export const fetchSavedStoriesMeServer = async () => {
+  const cookieHeader = (await cookies()).toString();
+
+  const res = await api.get('/users/me/saved', {
+    headers: {
+      Cookie: cookieHeader,
+    },
+  });
+
+  return res.data.data.savedStories;
+};
+

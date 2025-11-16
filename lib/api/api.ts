@@ -14,6 +14,7 @@ export const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+
 // Flag to prevent infinite refresh loops
 let isRefreshing = false;
 let failedQueue: Array<{
@@ -102,10 +103,7 @@ api.interceptors.response.use(
       if (isMissingToken) {
         return Promise.reject(error);
       }
-      const isGetMeRequest = originalRequest?.url?.includes('/users/me');
-      if (isGetMeRequest) {
-        return Promise.reject(error);
-      }
+      // Allow refresh even for /users/me to recover expired access tokens
 
       if (isRefreshing) {
         // If already refreshing, queue this request

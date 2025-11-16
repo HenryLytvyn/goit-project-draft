@@ -1,3 +1,4 @@
+
 import {
   User,
   GetUsersResponse,
@@ -6,11 +7,21 @@ import {
   ArticlesWithPagination,
   PaginationData,
 } from '@/types/user';
-import { api } from './api';
+
 import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { extractUser } from './errorHandler';
-import { StoriesResponse, Story, StoryByIdResponse } from '@/types/story';
+
+import {
+  SavedStory,
+  StoriesResponse,
+  Story,
+  StoryByIdResponse,
+  UserSavedArticlesResponse,
+} from '@/types/story';
 import { AxiosError, isAxiosError } from 'axios';
+import { api } from '../api/api';
+
+export type ApiError = AxiosError<{ error: string }>;
 
 /**
  * Register user
@@ -27,6 +38,7 @@ export const register = async (data: RegisterRequest) => {
 export const login = async (data: LoginRequest) => {
   const res = await api.post<User>('/auth/login', data);
   const user = extractUser(res.data) as User | null;
+
   return user;
 };
 
@@ -110,6 +122,17 @@ export const logout = async () => {
 };
 
 /**
+ * Try to refresh session on the client (will set cookies via Next API route)
+ */
+export async function refreshSession(): Promise<boolean> {
+  try {
+    await api.post('/auth/refresh', {});
+    return true;
+  } catch {
+    return false;
+  }
+}
+/**
  * Check if session is valid (lightweight check)
  */
 export const checkSession = async (): Promise<boolean> => {
@@ -125,19 +148,23 @@ export const checkSession = async (): Promise<boolean> => {
   }
 };
 
-export async function fetchStories(page = 1, perPage = 3): Promise<Story[]> {
+export async function fetchStories(
+  page = 1,
+  perPage = 3,
+  categoryId?: string
+): Promise<Story[]> {
   const response = await api.get<StoriesResponse>(`/stories`, {
-    params: { page, perPage, sort: 'favoriteCount' },
+    params: { page, perPage, sort: 'favoriteCount', category: categoryId },
   });
   return response.data?.data || [];
 }
 
 export async function addStoryToFavorites(storyId: string): Promise<void> {
-  await api.post(`/me/saved/${storyId}`);
+  await api.post(`/users/me/saved/${storyId}`);
 }
 
 export async function removeStoryFromFavorites(storyId: string): Promise<void> {
-  await api.delete(`/me/saved/${storyId}`);
+  await api.delete(`/users/me/saved/${storyId}`);
 }
 /*Haievoi Serhii*/
 export async function getUsersClient({
@@ -268,3 +295,119 @@ export async function fetchStoryByIdClient(storyId: string): Promise<Story> {
   const response = await api.get<StoryByIdResponse>(`/stories/${storyId}`);
   return response.data.data;
 }
+
+export async function fetchSavedStoriesByUserId(
+  userId: string
+): Promise<SavedStory[]> {
+  console.log('fetchSavedStoriesByUserId CALL with userId:', userId);
+
+  const res = await api.get<UserSavedArticlesResponse>(
+    `/users/${userId}/saved-articles`
+  );
+
+  console.log(
+    'fetchSavedStoriesByUserId RESPONSE:',
+    res.data.data.savedStories
+  );
+
+  return res.data.data.savedStories;
+}
+
+/**
+ * Get current user profile with articles
+ */
+export async function getMeProfile(): Promise<{
+  user: User;
+  articles: Story[];
+}> {
+  const res = await api.get('/users/me/profile');
+  const profileData = res.data.data;
+
+  // Створюємо User об'єкт
+  const user: User = {
+    _id: profileData._id,
+    name: profileData.name,
+    avatarUrl: profileData.avatarUrl,
+    articlesAmount: profileData.articlesAmount,
+    createdAt: profileData.createdAt,
+    updatedAt: profileData.updatedAt,
+    description: profileData.description,
+  };
+
+  // Завантажуємо повну інформацію про кожну історію
+  const articles = await Promise.allSettled(
+    (profileData.articles || []).map(
+      async (article: {
+        _id: string;
+        title: string;
+        img: string;
+        date: string;
+        favoriteCount: number;
+        createdAt: string;
+        category: { _id: string; name: string };
+      }) => {
+        try {
+          const fullStory = await fetchStoryByIdClient(article._id);
+          return fullStory;
+        } catch {
+          // Fallback до базової інформації без article
+          return {
+            _id: article._id,
+            img: article.img,
+            title: article.title,
+            article: '',
+            category: article.category,
+            ownerId: {
+              _id: profileData._id,
+              name: profileData.name,
+              avatarUrl: profileData.avatarUrl || '',
+              articlesAmount: profileData.articlesAmount,
+              description: profileData.description ?? undefined,
+            },
+            date: article.date,
+            favoriteCount: article.favoriteCount,
+          } as Story;
+        }
+      }
+    )
+  );
+
+  const stories = articles
+    .map(result => (result.status === 'fulfilled' ? result.value : null))
+    .filter((story): story is Story => story !== null);
+
+  return { user, articles: stories };
+}
+
+/**
+ * Get user saved articles
+ */
+export async function getUserSavedArticles(userId: string): Promise<{
+  user: User;
+  savedStories: Story[];
+}> {
+  const res = await api.get(`/users/${userId}/saved-articles`);
+  const data = res.data.data;
+
+  const user: User = {
+    _id: data.user._id,
+    name: data.user.name,
+    avatarUrl: data.user.avatarUrl,
+    articlesAmount: data.user.articlesAmount,
+    createdAt: data.user.createdAt,
+    description: data.user.description ?? undefined,
+  };
+
+  return {
+    user,
+    savedStories: data.savedStories || [],
+  };
+}
+
+export async function fetchSavedStoriesMe(): Promise<SavedStory[]> {
+  const res = await api.get<UserSavedArticlesResponse>(
+    '/users/me/saved-articles'
+  );
+  return res.data.data.savedStories;
+}
+

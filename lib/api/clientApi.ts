@@ -113,6 +113,17 @@ export const logout = async () => {
 };
 
 /**
+ * Try to refresh session on the client (will set cookies via Next API route)
+ */
+export async function refreshSession(): Promise<boolean> {
+  try {
+    await api.post('/auth/refresh', {});
+    return true;
+  } catch {
+    return false;
+  }
+}
+/**
  * Check if session is valid (lightweight check)
  */
 export const checkSession = async (): Promise<boolean> => {

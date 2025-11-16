@@ -3,7 +3,7 @@
 import { useAuthStore } from '@/lib/store/authStore';
 import { User } from '@/types/user';
 import { useEffect, useState } from 'react';
-import { getMe } from '@/lib/api/clientApi';
+import { getMe, refreshSession } from '@/lib/api/clientApi';
 
 type Props = {
   children: React.ReactNode;
@@ -91,8 +91,19 @@ const AuthProvider = ({ children, initialUser = null }: Props) => {
             // Сесія активна - оновлюємо дані
             setUser(currentUser);
           } else {
-            // Сесія неактивна - очищаємо
-            clearIsAuthenticated();
+            // Спробуємо оновити сесію і повторити запит
+            const refreshed = await refreshSession();
+            if (refreshed) {
+              const retried = await getMe(true);
+              if (retried) {
+                setUser(retried);
+              } else {
+                clearIsAuthenticated();
+              }
+            } else {
+              // Сесія неактивна - очищаємо
+              clearIsAuthenticated();
+            }
           }
         } catch {
           // Помилка при перевірці - очищаємо

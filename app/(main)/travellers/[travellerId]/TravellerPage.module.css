@@ -96,6 +96,14 @@
   box-shadow: 0 6px 12px rgba(59, 130, 246, 0.08);
   border: 1 solid #4169e1;
 }
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.loader {
+  position: static;
+}
 @media only screen and (min-width: 768px) {
   .travellerInfoWraper {
     flex-direction: row;

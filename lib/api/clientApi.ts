@@ -4,6 +4,7 @@ import { LoginRequest, RegisterRequest } from '@/types/auth';
 import { extractUser } from './errorHandler';
 import { StoriesResponse, Story } from '@/types/story';
 import { AxiosError } from 'axios';
+import { CreateStory, StoryResponse } from '@/types/addStoryForm/story';
 
 /**
  * Register user
@@ -124,4 +125,21 @@ export async function getUsersClient({
     params: { page, perPage },
   });
   return res.data;
+}
+
+// Story create form
+
+export async function createStory(
+  newStory: CreateStory
+): Promise<StoryResponse> {
+  const formData = new FormData();
+  formData.append('title', newStory.title);
+  formData.append('article', newStory.article);
+  formData.append('category', newStory.category);
+  formData.append('img', newStory.img);
+
+  const { data } = await api.post<StoryResponse>('/stories', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data;
 }

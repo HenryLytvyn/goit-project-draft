@@ -1,4 +1,4 @@
-'use-client';
+'use client';
 
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import css from './AddStoryForm.module.css';

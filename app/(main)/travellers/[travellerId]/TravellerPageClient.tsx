@@ -152,7 +152,7 @@ export default function TravellerPageClient({
       <TravellersStories
         stories={stories}
         isAuthenticated={false}
-        className={styles.travellerPageStoriesList}
+        // className={styles.travellerPageStoriesList}
       />
 
       {hasMore && stories.length > 0 && (

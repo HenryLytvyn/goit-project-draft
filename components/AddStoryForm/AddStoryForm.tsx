@@ -4,7 +4,6 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import css from './AddStoryForm.module.css';
 import { useId, useState } from 'react';
 import Image from 'next/image';
-import StoryFormSchemaValidate from '@/YupSchemes/StoryFormSchemaValidate';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createStory } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
@@ -12,6 +11,7 @@ import BackgroundOverlay from '../BackgroundOverlay/BackgroundOverlay';
 import Loader from '../Loader/Loader';
 import { useLockScroll } from '@/lib/hooks/useLockScroll';
 import { toast } from 'react-hot-toast';
+import StoryFormSchemaValidate from '@/lib/validation/StoryFormSchemaValidate';
 
 // interface AddStoryFormTypes {
 //   variant: 'create-story' | 'edit-story';
@@ -61,11 +61,15 @@ export default function AddStoryForm() {
   const queryClient = useQueryClient();
   const addStory = useMutation({
     mutationFn: createStory,
-    onSuccess: response => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['allStories'],
       });
-      toast.success('Історія успішно опублікована!');
+      toast.success('Історія успішно опублікована!', {
+        style: {
+          maxWidth: '500px',
+        },
+      });
     },
   });
 
@@ -78,7 +82,11 @@ export default function AddStoryForm() {
     actions: FormikHelpers<CreateStoryInitial>
   ) {
     if (values.category === 'Категорія' || !values.img) {
-      toast.error('Виберіть категорію та додайте фото');
+      toast.error('Виберіть категорію та додайте фото', {
+        style: {
+          maxWidth: '500px',
+        },
+      });
       return;
     }
 
@@ -100,7 +108,12 @@ export default function AddStoryForm() {
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
       toast.error(
-        `Помилка збереження: ${message}. Спробуйте зберегти вашу історію пізніше.`
+        `Помилка збереження: ${message}. Спробуйте зберегти вашу історію пізніше.`,
+        {
+          style: {
+            maxWidth: '500px',
+          },
+        }
       );
     }
   }
@@ -249,7 +262,9 @@ export default function AddStoryForm() {
               >
                 Зберегти
               </button>
-              <button className={css.rejectBtn}>Відмінити</button>
+              <button onClick={router.back} className={css.rejectBtn}>
+                Відмінити
+              </button>
             </div>
           </Form>
         )}

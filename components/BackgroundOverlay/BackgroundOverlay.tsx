@@ -1,3 +1,5 @@
+'use client';
+
 import css from './BackgroundOverlay.module.css';
 
 type BackgroundOverlayProps = {

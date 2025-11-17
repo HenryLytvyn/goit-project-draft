@@ -1,13 +1,16 @@
 'use client';
 
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
-import { useParams } from 'next/navigation';
+import css from './AddStoryPage.module.css';
+import AddStoryForm from '@/components/AddStoryForm/AddStoryForm';
 
-export default function EditStoryPage() {
-  const params = useParams();
+export default function AddStoryPage() {
   return (
     <ProtectedRoute>
-      <h2>EditStory – {params.storyId}</h2>
+      <div className={`container ${css.addStoryPageContainer}`}>
+        <h1 className={css.mainTitle}>Редагування історії</h1>
+        <AddStoryForm />
+      </div>
     </ProtectedRoute>
   );
 }

@@ -5,12 +5,14 @@ import css from './TravellersStories.module.css';
 interface TravellersStoriesProps {
   stories: Story[];
   isAuthenticated: boolean;
+
   // className?: string; // додатковий проп для кастомного стилю
 }
 
 export default function TravellersStories({
   stories,
   isAuthenticated,
+  onRemoveSavedStory,
   // className,
 }: TravellersStoriesProps) {
   return (
@@ -20,6 +22,7 @@ export default function TravellersStories({
           key={story._id}
           story={story}
           isAuthenticated={isAuthenticated}
+          onRemoveSavedStory={onRemoveSavedStory}
         />
       ))}
     </ul>

@@ -2,26 +2,16 @@
 
 'use client';
 
-// import { fetchStoryByIdServer } from '@/lib/api/serverApi';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import BackgroundOverlay from '../BackgroundOverlay/BackgroundOverlay';
 import css from './EditStoryForm.module.css';
 import Loader from '../Loader/Loader';
-import { useEffect, useId, useState } from 'react';
 import Image from 'next/image';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { FormikLocalStoragePersistor } from '../Forms/FormikLocalStoragePersistor';
 import StoryFormSchemaValidate from '@/lib/validation/StoryFormSchemaValidate';
-import { fetchStoryByIdClient } from '@/lib/api/clientApi';
-
-// 691ba2a23f6d884087fda64d
-
-// type Category = {
-//   _id: string;
-//   name: string;
-// };
+import { Story } from '@/types/story';
+import { useEffect, useId, useState } from 'react';
 
 type Category =
   | 'Європа'
@@ -34,85 +24,60 @@ type Category =
   | 'Кавказ'
   | 'Океанія';
 
-interface Story {
+interface StoryEdit {
   title: string;
   article: string;
   category: Category;
-  img: string | File; // можем хранить и ссылку, и файл
+  img: string | File;
 }
 
 const CREATE_STORY_DRAFT_KEY = 'create-story-draft';
 
 type Props = {
-  id: string;
+  story: Story;
 };
 
-export default function EditStoryForm({ id }: Props) {
-  console.log(id);
+export default function EditStoryForm({ story }: Props) {
   const placeholderImage = '/img/AddStoryForm/placeholder-image.png';
-  //   const { id } = useParams<{ id: string }>();
+  const EditStoryInitial: StoryEdit = {
+    title: '',
+    article: '',
+    category: 'Категорія' as Category,
+    img: '',
+  };
   //   const id = '691ba2a23f6d884087fda64d';
   const router = useRouter();
   const fieldId = useId();
   const [preview, setPreview] = useState<string>(placeholderImage);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['story', id],
-    queryFn: () => fetchStoryByIdClient(id),
-    enabled: !!id,
-  });
-
-  console.log(data);
-
-  //   useEffect(() => {
-  //     if (data?.img) {
-  //       setPreview(data.img);
-  //     }
-  //   }, [data?.img]);
+  const [storyData, setStoryData] = useState<StoryEdit>(EditStoryInitial);
 
   useEffect(() => {
-    if (!data) return;
-    if (data.img) setPreview(data.img);
-  }, [data]);
+    if (!story) return;
 
-  if (isLoading || !data) {
-    return (
-      <>
-        <BackgroundOverlay isActive={true} isOverAll={true} />
-        <div className={css.loaderContainer}>
-          <Loader />
-        </div>
-      </>
-    );
-  }
+    setPreview(story.img || placeholderImage);
 
-  const EditStoryInitial: Story = data
-    ? {
-        title: data.title,
-        article: data.article,
-        category: data.category.name as Category,
-        img: data.img || placeholderImage,
-      }
-    : {
-        title: '',
-        article: '',
-        category: 'Європа', // дефолтная
-        img: placeholderImage,
-      };
+    setStoryData({
+      title: story.title || '',
+      article: story.article || '',
+      category: (story.category?.name as Category) || 'Категорія',
+      img: story.img || '',
+    });
+  }, [story]);
 
   function handleSubmit() {}
-
+  // console.log('Formik initial values:', EditStoryInitial);
   return (
     <>
-      <Formik<Story>
+      <Formik<StoryEdit>
         enableReinitialize
-        initialValues={EditStoryInitial}
+        initialValues={storyData}
         validationSchema={StoryFormSchemaValidate}
         onSubmit={handleSubmit}
+        // validateOnMount
       >
         {formik => (
           <Form className={css.form}>
-            <FormikLocalStoragePersistor<Story>
+            <FormikLocalStoragePersistor<StoryEdit>
               formik={formik}
               storageKey={CREATE_STORY_DRAFT_KEY}
               excludeFields={['img']}
@@ -254,7 +219,7 @@ export default function EditStoryForm({ id }: Props) {
               <button
                 type="submit"
                 className={
-                  formik.isValid && formik.dirty
+                  formik.isValid
                     ? css.saveBtn
                     : `${css.saveBtn} ${css.btnDisabled}`
                 }

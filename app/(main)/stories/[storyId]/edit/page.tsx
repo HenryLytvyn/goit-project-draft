@@ -2,23 +2,22 @@
 
 import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute';
 import css from './EditStoryPage.module.css';
-// import EditStoryFormClient from './EditStoryForm.client';
 import EditStoryForm from '@/components/EditStoryForm/EditStoryForm';
 import { fetchStoryByIdServer } from '@/lib/api/serverApi';
 
 type Props = {
-  params: Promise<{ storyId: string }>;
+  params: { storyId: string };
 };
 
 export default async function AddStoryPage({ params }: Props) {
-  const { storyId } = await params;
+  const { storyId } = params;
   const story = await fetchStoryByIdServer(storyId);
+  console.log(story);
   return (
     <ProtectedRoute>
       <div className={`container ${css.addStoryPageContainer}`}>
         <h1 className={css.mainTitle}>Редагування історії</h1>
-        <EditStoryForm id={storyId} />
-        {/* <EditStoryFormClient /> */}
+        <EditStoryForm story={story} />
       </div>
     </ProtectedRoute>
   );

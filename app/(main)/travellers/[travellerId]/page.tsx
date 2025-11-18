@@ -20,7 +20,7 @@ interface TravellerPageProps {
 }
 
 interface GenerateMetadataProps {
-  params: Promise<{ travellerId: string }>;
+  params: { travellerId: string };
 }
 
 export const generateMetadata = async ({
@@ -42,7 +42,6 @@ export const generateMetadata = async ({
     title,
     description,
 
-    // Open Graph (Facebook, Instagram, Telegram)
     openGraph: {
       title,
       description,
@@ -60,7 +59,6 @@ export const generateMetadata = async ({
       locale: 'uk_UA',
     },
 
-    // Twitter / X
     twitter: {
       card: 'summary_large_image',
       title,
@@ -68,12 +66,10 @@ export const generateMetadata = async ({
       images: [imageUrl],
     },
 
-    // Canonical
     alternates: {
       canonical: pageUrl,
     },
 
-    // Icons
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',

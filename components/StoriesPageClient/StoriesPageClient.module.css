@@ -17,7 +17,7 @@
 
 
 .title {
-  font-family: var(--font-sora);
+  font-family: var(--font-sora) sans-serif;
   font-weight: 700;
   font-size: 32px;
   line-height: 1.1;
@@ -48,6 +48,11 @@
     line-height: 1.5;
     margin-top: 40px;
   }
+
+    .loader{
+      margin-top: 40px;
+      }
+    
     
   
   @media screen and (min-width: 1440px) {
@@ -96,14 +101,3 @@
 
 
 
-
-/* .wrapper {
-  width: 100%;
-  text-align: center;
-}
-
-
-.moreBtn {
-  display: block;
-  margin: 0 auto;
-} */

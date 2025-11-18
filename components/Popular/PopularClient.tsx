@@ -29,7 +29,7 @@ export default function PopularClient({initialStories, withPagination = true}: P
   const { data: savedStories = [] } = useQuery<SavedStory[]>({
     queryKey: ['savedStoriesByUser', userId],
     queryFn: () => fetchSavedStoriesByUserId(userId as string),
-    enabled: isAuthenticated, // якщо юзер не авторізованний
+    enabled: isAuthenticated,
   });
 
   let savedIds: string[] = [];
@@ -101,17 +101,18 @@ export default function PopularClient({initialStories, withPagination = true}: P
         />
         {withPagination && hasMore && (
           <div className={css.stories__footer}>
-            <button
-              onClick={handleLoadMore}
-              disabled={loading}
-              className={css.stories__more}
-            >
-              {loading ? 'Завантаження...' : 'Переглянути всі'}
-              {loading && page > 1 && <Loader />}
-            </button>
+            {loading ? (<Loader />) : (
+              <button
+                onClick={handleLoadMore}
+                disabled={loading}
+                className={css.stories__more}
+              >Переглянути всі
+               </button>
+)}
           </div>
         )}
       </div>
+       {loading && page > 1}
     </section>
   );
-}
+};

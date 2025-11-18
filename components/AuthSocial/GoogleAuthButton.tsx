@@ -1,17 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ComponentType } from 'react';
 import { getGoogleAuthUrl } from '@/lib/api/clientApi';
 import { toast } from 'react-hot-toast';
 import css from './GoogleAuthButton.module.css';
 
+// Тип для іконки: просто будь-який React-компонент, який приймає className
+type GoogleIconType = ComponentType<{ className?: string }>;
+
 export default function GoogleAuthButton() {
-  const [FaGoogle, setFaGoogle] = useState<React.ComponentType<{ size?: number }> | null>(null);
+  const [FaGoogle, setFaGoogle] = useState<GoogleIconType | null>(null);
 
   useEffect(() => {
-    // Динамічний імпорт для обходу проблем з Turbopack
     import('react-icons/fa')
       .then((module) => {
+        // Беремо FaGoogle з модуля і кладемо як компонент
         setFaGoogle(() => module.FaGoogle);
       })
       .catch((error) => {
@@ -38,12 +41,19 @@ export default function GoogleAuthButton() {
   return (
     <div className={css.container}>
       <p className={css.orText}>або</p>
-     <button type="button" className={css.button} onClick={handleGoogleLogin}>
-  <span className={css.buttonContent}>
-    <FaGoogle className={css.icon} />
-    Увійти через Google
-  </span>
-</button>
+
+      <button type="button" className={css.button} onClick={handleGoogleLogin}>
+        <span className={css.buttonContent}>
+          {/* Рендеримо іконку тільки якщо вона вже завантажена */}
+          {FaGoogle ? (
+            <FaGoogle className={css.icon} />
+          ) : (
+            // fallback, поки іконка вантажиться (можна G, можна skeleton)
+            <span className={css.iconPlaceholder}>G</span>
+          )}
+          Увійти через Google
+        </span>
+      </button>
     </div>
   );
 }

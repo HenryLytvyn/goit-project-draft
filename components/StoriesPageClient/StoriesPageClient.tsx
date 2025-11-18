@@ -17,14 +17,11 @@ interface Props {
 
 export default function StoriesPageClient({ initialStories, categories }: Props) {
   const [stories, setStories] = useState<Story[]>(initialStories);
-    const [page, setPage] = useState(1);
-
-    
-    const [categoryId, setCategoryId] = useState<string>("all");
-
+  const [page, setPage] = useState(1);
+  const [categoryId, setCategoryId] = useState<string>("all");
   const [hasMore, setHasMore] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [isTablet, setIsTablet] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
 
   
@@ -72,12 +69,13 @@ export default function StoriesPageClient({ initialStories, categories }: Props)
       try {
           const nextPage = page + 1;
           const categoryParam = categoryId === "all" ? undefined : categoryId;
-          const newStories = await fetchStories(nextPage, PER_PAGE, categoryParam);
+        const newStories = await fetchStories(nextPage, PER_PAGE, categoryParam);
+        setStories(prev => [...prev, ...newStories]);
           
-           if (newStories.length === 0) {
+        if (newStories.length < FIRST_LOAD) {
       setHasMore(false);
     } else {
-      setStories(prev => [...prev, ...newStories]);
+      
       setPage(nextPage);
     }
       } catch (error) {
@@ -93,24 +91,22 @@ export default function StoriesPageClient({ initialStories, categories }: Props)
       <h1 className={css.title}>Історії Мандрівників</h1>
 
           <CategoriesMenu categories={categories} value={categoryId} onChange={handleCategoryChange} />
-
-      {loading && page === 1 && <Loader />} 
-
+      {loading && page === 1}
       <TravellersStories stories={stories} isAuthenticated={false} />
-
-      {hasMore && (
+{hasMore && (
         <div className={css.stories__footer}>
+          {loading ? (<Loader className={css.loader} />) : (
                    <button
                      onClick={handleLoadMore}
                      disabled={loading}
                      className={css.stories__more}
                    >
-                     {loading ? 'Завантаження...' : 'Переглянути ще'}
+                  Переглянути ще
                    </button>
+          )}
                  </div>
       )}
-
-      {loading && page > 1 && <Loader />}
+{loading && page > 1}
     </section>
   );
 }

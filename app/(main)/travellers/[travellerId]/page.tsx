@@ -16,17 +16,17 @@ import type { BackendArticleFromUser, User } from '@/types/user';
 import styles from './TravellerPage.module.css';
 
 interface TravellerPageProps {
-  params: { travellerId: string };
+  params: Promise<{ travellerId: string }>;
 }
 
 interface GenerateMetadataProps {
-  params: { travellerId: string };
+  params: Promise<{ travellerId: string }>;
 }
 
 export const generateMetadata = async ({
   params,
 }: GenerateMetadataProps): Promise<Metadata> => {
-  const { travellerId } = params;
+  const { travellerId } = await params;
 
   const res = await getUserByIdServer(travellerId);
   const user = res.data.user;
@@ -83,7 +83,7 @@ export const generateMetadata = async ({
 };
 
 export default async function TravellerPage({ params }: TravellerPageProps) {
-  const { travellerId } = params;
+  const { travellerId } = await params;
 
   try {
     const queryClient = new QueryClient();

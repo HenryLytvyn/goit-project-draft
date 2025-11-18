@@ -58,7 +58,7 @@ export default function TravellersStoriesItem({
     setIsSaved(nextSaved);
     setFavoriteCount(prevCount + (nextSaved ? 1 : -1));
 
-    // ❗ відразу видаляємо картку зі сторінки, якщо "unfavorite"
+    // видалення картки зі сторінки, якщо "unfavorite"
     if (!nextSaved && onRemoveSavedStory) {
       onRemoveSavedStory(story._id);
     }
@@ -88,7 +88,7 @@ export default function TravellersStoriesItem({
         );
 
         await removeStoryFromFavorites(story._id);
-        // >>> ВАЖЛИВО: видалити картку зі сторінки
+      // видалити картку зі сторінки
         if (onRemoveSavedStory) {
           onRemoveSavedStory(story._id);
         }
@@ -111,32 +111,6 @@ export default function TravellersStoriesItem({
     }
   };
 
-  // const handleSave = async () => {
-  // if (!isAuthenticated) {
-  // router.push('/auth/register');
-  // return;
-  // }
-
-  // try {
-  // setIsSaving(true);
-  // if (!isSaved) {
-  // await addStoryToFavorites(story._id);
-  // setFavoriteCount(prev => prev + 1);
-  // setIsSaved(true);
-  // toast.success('Додано до збережених!');
-  // } else {
-  // await removeStoryFromFavorites(story._id);
-  // setFavoriteCount(prev => prev - 1);
-  // setIsSaved(false);
-  // toast('Видалено із збережених');
-  // }
-  // } catch (error) {
-  // console.error(error);
-  // } finally {
-  // setIsSaving(false);
-  // }
-  // };
-
   function formatDate(dateString: string) {
     const d = new Date(dateString);
     const day = String(d.getDate()).padStart(2, '0');
@@ -144,7 +118,7 @@ export default function TravellersStoriesItem({
     const year = d.getFullYear();
     return `${day}.${month}.${year}`;
   }
-
+const categoryName = story.category?.name ?? 'Без категорії';
   return (
     <>
       <li className={css.story}>
@@ -157,7 +131,7 @@ export default function TravellersStoriesItem({
         />
 
         <div className={css.story__content}>
-          <p className={css.story__category}>{story.category.name}</p>
+          <p className={css.story__category}>{categoryName}</p>
           <h3 className={css.story__title}>{story.title}</h3>
           <p className={css.story__text}>{story.article}</p>
 

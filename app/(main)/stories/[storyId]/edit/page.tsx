@@ -12,7 +12,7 @@ type Props = {
 export default async function AddStoryPage({ params }: Props) {
   const { storyId } = await params;
   const story = await fetchStoryByIdServer(storyId);
-  console.log(story);
+
   return (
     <ProtectedRoute>
       <div className={`container ${css.addStoryPageContainer}`}>
